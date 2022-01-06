@@ -23,25 +23,25 @@ int main()
 {
 	SqList L;
 	InitList(L);
-	if (ListInsert(L,1,101))		printf("ÒÑ½«ÔªËØ101²åÈëÎ»Ğò1,²åÈë³É¹¦\n");
-	else		printf("Î»Ğò1²»ºÏ·¨»òË³Ğò±íÒÑÂú,²åÈëÊ§°Ü\n"); 
-	if (ListInsert(L,2,202))		printf("ÒÑ½«ÔªËØ202²åÈëÎ»Ğò2,²åÈë³É¹¦\n");
-	else		printf("Î»Ğò2²»ºÏ·¨»òË³Ğò±íÒÑÂú,²åÈëÊ§°Ü\n"); 
-	if (ListInsert(L,3,303))		printf("ÒÑ½«ÔªËØ303²åÈëÎ»Ğò3,²åÈë³É¹¦\n");
-	else		printf("Î»Ğò3²»ºÏ·¨»òË³Ğò±íÒÑÂú,²åÈëÊ§°Ü\n"); 
+	if (ListInsert(L,1,101))		printf("å·²å°†å…ƒç´ 101æ’å…¥ä½åº1,æ’å…¥æˆåŠŸ\n");
+	else		printf("ä½åº1ä¸åˆæ³•æˆ–é¡ºåºè¡¨å·²æ»¡,æ’å…¥å¤±è´¥\n"); 
+	if (ListInsert(L,2,202))		printf("å·²å°†å…ƒç´ 202æ’å…¥ä½åº2,æ’å…¥æˆåŠŸ\n");
+	else		printf("ä½åº2ä¸åˆæ³•æˆ–é¡ºåºè¡¨å·²æ»¡,æ’å…¥å¤±è´¥\n"); 
+	if (ListInsert(L,3,303))		printf("å·²å°†å…ƒç´ 303æ’å…¥ä½åº3,æ’å…¥æˆåŠŸ\n");
+	else		printf("ä½åº3ä¸åˆæ³•æˆ–é¡ºåºè¡¨å·²æ»¡,æ’å…¥å¤±è´¥\n"); 
 		
 	PrintList(L);
 	
 	int e=-1;
 	if (ListDelete(L,2,e))
-		printf("ÒÑÉ¾³ıµÚ2¸öÔªËØ,É¾³ıÔªËØÖµÎª=%d\n",e);
+		printf("å·²åˆ é™¤ç¬¬2ä¸ªå…ƒç´ ,åˆ é™¤å…ƒç´ å€¼ä¸º=%d\n",e);
 	else
-		printf("Î»Ğò2²»ºÏ·¨,É¾³ıÊ§°Ü\n"); 
+		printf("ä½åº2ä¸åˆæ³•,åˆ é™¤å¤±è´¥\n"); 
 		
 	PrintList(L);
 	
-	printf("303µÄÎ»ĞòÎª%d\n",LocateElem(L,303));
-	printf("Î»ĞòÎª1µÄÔªËØÊÇ%d",GetElem(L,1));
+	printf("303çš„ä½åºä¸º%d\n",LocateElem(L,303));
+	printf("ä½åºä¸º1çš„å…ƒç´ æ˜¯%d",GetElem(L,1));
 	
 	return 0;
 }
@@ -55,7 +55,8 @@ void InitList(SqList &L)
 
 void DestroyList(SqList &L)
 {
-	//
+	L.length=0;
+	//ç³»ç»Ÿè‡ªåŠ¨å›æ”¶ç©ºé—´ 
 }
 
 bool ListInsert(SqList &L, int i, int e)	 
