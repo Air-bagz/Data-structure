@@ -100,8 +100,19 @@ int GetElem(SqList L, int i)
 	return L.data[i-1];					
 }
 
+int Length(SqList L)
+{
+	return(L.length);
+}
+
 void PrintList(SqList L)
 {
 	for (int i=0; i<L.length; i++)
 		printf("%d\n",L.data[i]);
  } 
+ 
+bool Empty(SqList L)
+{
+	if (L.length==0)	return true;
+	else return false; 
+}
