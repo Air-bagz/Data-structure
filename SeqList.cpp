@@ -29,12 +29,12 @@ int main()
 	printf("L.length=%d\n",L.length);
 	printf("L.MaxSize=%d\n",L.MaxSize);
 	
-	if (ListInsert(L,1,101))		printf("ÒÑ½«ÔªËØ101²åÈëÎ»Ğò1,²åÈë³É¹¦\n");
-	else		printf("Î»Ğò1²»ºÏ·¨»òË³Ğò±íÒÑÂú,²åÈëÊ§°Ü\n"); 
-	if (ListInsert(L,2,202))		printf("ÒÑ½«ÔªËØ202²åÈëÎ»Ğò2,²åÈë³É¹¦\n");
-	else		printf("Î»Ğò2²»ºÏ·¨»òË³Ğò±íÒÑÂú,²åÈëÊ§°Ü\n"); 
-	if (ListInsert(L,3,303))		printf("ÒÑ½«ÔªËØ303²åÈëÎ»Ğò3,²åÈë³É¹¦\n");
-	else		printf("Î»Ğò3²»ºÏ·¨»òË³Ğò±íÒÑÂú,²åÈëÊ§°Ü\n"); 
+	if (ListInsert(L,1,101))		printf("å·²å°†å…ƒç´ 101æ’å…¥ä½åº1,æ’å…¥æˆåŠŸ\n");
+	else		printf("ä½åº1ä¸åˆæ³•æˆ–é¡ºåºè¡¨å·²æ»¡,æ’å…¥å¤±è´¥\n"); 
+	if (ListInsert(L,2,202))		printf("å·²å°†å…ƒç´ 202æ’å…¥ä½åº2,æ’å…¥æˆåŠŸ\n");
+	else		printf("ä½åº2ä¸åˆæ³•æˆ–é¡ºåºè¡¨å·²æ»¡,æ’å…¥å¤±è´¥\n"); 
+	if (ListInsert(L,3,303))		printf("å·²å°†å…ƒç´ 303æ’å…¥ä½åº3,æ’å…¥æˆåŠŸ\n");
+	else		printf("ä½åº3ä¸åˆæ³•æˆ–é¡ºåºè¡¨å·²æ»¡,æ’å…¥å¤±è´¥\n"); 
 	
 	IncreaseSize(L,5);	
 	printf("L.length=%d\n",L.length);
@@ -43,14 +43,14 @@ int main()
 	
 	int e=-1;
 	if (ListDelete(L,2,e))
-		printf("ÒÑÉ¾³ıµÚ2¸öÔªËØ,É¾³ıÔªËØÖµÎª=%d\n",e);
+		printf("å·²åˆ é™¤ç¬¬2ä¸ªå…ƒç´ ,åˆ é™¤å…ƒç´ å€¼ä¸º=%d\n",e);
 	else
-		printf("Î»Ğò2²»ºÏ·¨,É¾³ıÊ§°Ü\n"); 
+		printf("ä½åº2ä¸åˆæ³•,åˆ é™¤å¤±è´¥\n"); 
 		
 	PrintList(L);
 	
-	printf("303µÄÎ»ĞòÎª%d\n",LocateElem(L,303));
-	printf("Î»ĞòÎª1µÄÔªËØÊÇ%d\n",GetElem(L,1));
+	printf("303çš„ä½åºä¸º%d\n",LocateElem(L,303));
+	printf("ä½åºä¸º1çš„å…ƒç´ æ˜¯%d\n",GetElem(L,1));
 	
 	printf("L.length=%d\n",L.length);
 	printf("L.MaxSize=%d\n",L.MaxSize);
@@ -127,8 +127,19 @@ int GetElem(SeqList L, int i)
 	return L.data[i-1];					
 }
 
+int Length(SeqList L)
+{
+	return(L.length);
+}
+
 void PrintList(SeqList L)
 {
 	for (int i=0; i<L.length; i++)
 		printf("%d\n",L.data[i]);
  } 
+ 
+bool Empty(SeqList L)
+{
+	if (L.length==0)	return true;
+	else return false; 
+}
