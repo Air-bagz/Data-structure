@@ -58,14 +58,15 @@ bool InitList(LinkList &L)
 void DestroyList(LinkList &L)
 {	
 	LNode *q=L->next;
-	while (q!=NULL)		//只要后继不空，就删后续q 
+	while (q!=NULL)		//只要L后继不空，就删后继q 
 	{
-		L->next=q->next;
+		L->next=q->next;		//while (L->next!=NULL) 	DeleteNode2(L); 
 		free(q);			
 		q=L->next;
 	}
 	printf("销毁链表后length=%d\n",Length(L));
-	free(L);		//删除头结点 
+	free(L);		//释放头结点 
+	L->next=NULL; 	//头指针指向NULL 
 }
 
 LNode *GetElem(LinkList L,int i)
@@ -125,10 +126,10 @@ bool DeleteNode2(LNode *p)
 {
 	if (p==NULL)	return false;	//空的删失败 
 	if (p->next==NULL)	return false;	//最后一个删失败 
-	LNode *q=p->next;
-	p->data=q->data;
-	p->next=q->next;
-	free(q);
+	LNode *q=p->next;			//令q指向*p的后继结点 
+	p->data=q->data;			//和后继结点交换数据域 
+	p->next=q->next;			//将*q结点从链中断开 
+	free(q);					//释放后继结点的存储空间 
 	return true; 
 }
 
