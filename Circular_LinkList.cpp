@@ -17,6 +17,8 @@ int main()
 {
 	LinkList L;
 	InitList(L);
+	if (Empty(L))	printf("empty\n");
+		else	printf("not empty\n");	
  } 
  
 bool InitList(LinkList &L)
