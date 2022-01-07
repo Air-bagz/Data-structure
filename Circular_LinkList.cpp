@@ -9,6 +9,16 @@ typedef struct LNode
 	struct LNode *next;
 }LNode,*LinkList;
 
+bool InitList(LinkList &L);
+bool Empty(LinkList L);
+bool isTail(LinkList L,LNode *p);
+
+int main()
+{
+	LinkList L;
+	InitList(L);
+ } 
+ 
 bool InitList(LinkList &L)
 {
 	L=(LNode *)malloc(sizeof(LNode));
@@ -17,20 +27,14 @@ bool InitList(LinkList &L)
 	return true;
 }
 
-bool Empty(LinkList L)				//ÅĞ¶ÏÑ­»·µ¥Á´±íÊÇ·ñÎª¿Õ 
+bool Empty(LinkList L)				//åˆ¤æ–­å¾ªç¯å•é“¾è¡¨æ˜¯å¦ä¸ºç©º 
 {
 	if (L->next==L)	return true;
 	else return false;
 }
 
-bool isTail(LinkList L,LNode *p)	//ÅĞ¶Ï½áµãpÊÇ·ñÎªÑ­»·µ¥Á´±íµÄ±íÎ²½áµã 
+bool isTail(LinkList L,LNode *p)	//åˆ¤æ–­ç»“ç‚¹pæ˜¯å¦ä¸ºå¾ªç¯å•é“¾è¡¨çš„è¡¨å°¾ç»“ç‚¹ 
 {
 	if (p->next==L)	return true;
 	else return false;
 }
-
-int main()
-{
-	LinkList L;
-	InitList(L);
- } 
