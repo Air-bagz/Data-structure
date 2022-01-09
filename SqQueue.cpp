@@ -1,12 +1,13 @@
 #include<stdio.h>
-#define MaxSize 10				//¶¨Òå¶ÓÁĞÖĞÔªËØµÄ×î´ó¸öÊı 
+
+#define MaxSize 10				//å®šä¹‰é˜Ÿåˆ—ä¸­å…ƒç´ çš„æœ€å¤§ä¸ªæ•° 
 
 typedef int ElemType;
 
 typedef struct
 {
-	ElemType data[MaxSize];		//ÓÃ¾²Ì¬Êı×é´æ·Å¶ÓÁĞÔªËØ 
-	int front,rear; 			//¶ÓÍ·Ö¸ÕëºÍ¶ÓÎ²Ö¸Õë 
+	ElemType data[MaxSize];		//ç”¨é™æ€æ•°ç»„å­˜æ”¾é˜Ÿåˆ—å…ƒç´  
+	int front,rear; 			//é˜Ÿå¤´æŒ‡é’ˆå’Œé˜Ÿå°¾æŒ‡é’ˆ 
 }SqQueue;
 
 void InitQueue(SqQueue &Q);
@@ -22,24 +23,35 @@ int main()
 	testQueue();
 }
 
+void testQueue()
+{
+	SqQueue Q;
+	InitQueue(Q);
+	EnQueue(Q,101);		EnQueue(Q,202);		EnQueue(Q,303);
+	int x;
+	DeQueue(Q,x);	printf("x=%d\n",x);
+	GetHead(Q,x);	printf("x=%d\n",x); 
+	printf("%d\n",(Q.rear+MaxSize-Q.front)%MaxSize);
+}
+
 void InitQueue(SqQueue &Q)
 {
 	Q.rear=Q.front=0;
 }
 
-bool EnQueue(SqQueue &Q,ElemType x)		//Èë¶Ó 
+bool EnQueue(SqQueue &Q,ElemType x)		//å…¥é˜Ÿ 
 {
-	if (QueueFull(Q))	return false;		//¶ÓÂú±¨´í 
-	Q.data[Q.rear]=x;				//rearÖ¸ÏòÏÂÒ»¸öÓ¦¸Ã²åÈëµÄÎ»ÖÃ 
-	Q.rear=(Q.rear+1)%MaxSize;		//¶ÓÎ²Ö¸ÕëºóÒÆ£¬[0,1,...,MaxSize-1]»·×´ 
+	if (QueueFull(Q))	return false;		//é˜Ÿæ»¡æŠ¥é”™ 
+	Q.data[Q.rear]=x;				//rearæŒ‡å‘ä¸‹ä¸€ä¸ªåº”è¯¥æ’å…¥çš„ä½ç½® 
+	Q.rear=(Q.rear+1)%MaxSize;		//é˜Ÿå°¾æŒ‡é’ˆåç§»ï¼Œ[0,1,...,MaxSize-1]ç¯çŠ¶ 
 	return true;
 }
 
 bool DeQueue(SqQueue &Q,ElemType &x)
 {
-	if (QueueEmpty(Q)) return false;		//¶Ó¿Õ±¨´í
-	x=Q.data[Q.front];				//frontÖ¸Ïò¶ÓÍ·ÔªËØ 
-	Q.front=(Q.front+1)%MaxSize; 	//¶ÓÍ·Ö¸ÕëºóÒÆ£¬»·×´ 
+	if (QueueEmpty(Q)) return false;		//é˜Ÿç©ºæŠ¥é”™
+	x=Q.data[Q.front];				//frontæŒ‡å‘é˜Ÿå¤´å…ƒç´  
+	Q.front=(Q.front+1)%MaxSize; 	//é˜Ÿå¤´æŒ‡é’ˆåç§»ï¼Œç¯çŠ¶ 
 	return true;
 }
 
@@ -52,23 +64,12 @@ bool GetHead(SqQueue Q,ElemType &x)
 
 bool QueueEmpty(SqQueue Q)
 {
-	if (Q.rear==Q.front)	return true;	//¶Ó¿ÕÌõ¼ş 
+	if (Q.rear==Q.front)	return true;	//é˜Ÿç©ºæ¡ä»¶ 
 	else return false;
 }
 
 bool QueueFull(SqQueue Q)
 {
-	if ( (Q.rear+1)%MaxSize==Q.front )	return true;	//¶ÓÂúÌõ¼ş	ÎşÉüÒ»¸ö 
+	if ( (Q.rear+1)%MaxSize==Q.front )	return true;	//é˜Ÿæ»¡æ¡ä»¶	ç‰ºç‰²ä¸€ä¸ª 
 	else return false;
  } 
-
-void testQueue()
-{
-	SqQueue Q;
-	InitQueue(Q);
-	EnQueue(Q,101);		EnQueue(Q,202);		EnQueue(Q,303);
-	int x;
-	DeQueue(Q,x);	printf("x=%d\n",x);
-	GetHead(Q,x);	printf("x=%d\n",x); 
-	printf("%d\n",(Q.rear+MaxSize-Q.front)%MaxSize);
-}
