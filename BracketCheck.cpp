@@ -5,7 +5,7 @@ typedef char ElemType;
 typedef struct
 {
 	ElemType data[MaxSize];		
-	int top;					//Õ»¶¥Ö¸Õë 
+	int top;					//æ ˆé¡¶æŒ‡é’ˆ 
  }SqStack;
  
 void InitStack(SqStack &S);
@@ -33,22 +33,22 @@ bool bracketCheck(char str[],int length)
 	for (int i=0;i<length;i++)
 	{
 		if (str[i]=='(' || str[i]=='[' || str[i]=='{')
-			Push(S,str[i]);				//É¨Ãèµ½×óÀ¨ºÅ£¬ÈëÕ» 
+			Push(S,str[i]);				//æ‰«æåˆ°å·¦æ‹¬å·ï¼Œå…¥æ ˆ 
 		else if (str[i]==')' || str[i]==']' || str[i]=='}')
-				{	//É¨Ãèµ½ÓÒÀ¨ºÅ£¬ÇÒµ±Ç°Õ»¿Õ£¬ÔòÆ¥ÅäÊ§°Ü 
+				{	//æ‰«æåˆ°å³æ‹¬å·ï¼Œä¸”å½“å‰æ ˆç©ºï¼Œåˆ™åŒ¹é…å¤±è´¥ 
 					if (StackEmpty(S))	return false;		
 					
 					char topElem;
-					Pop(S,topElem);		//Õ»¶¥ÔªËØ³öÕ» 
+					Pop(S,topElem);		//æ ˆé¡¶å…ƒç´ å‡ºæ ˆ 
 					if (str[i]==')' && topElem!='(')	return false;
 					if (str[i]==']' && topElem!='[')	return false;
 					if (str[i]=='}' && topElem!='{')	return false; 
 				}
 	}
-	return StackEmpty(S);		//¼ìË÷ÍêÈ«²¿À¨ºÅºó£¬Õ»¿ÕËµÃ÷Æ¥Åä³É¹¦	
+	return StackEmpty(S);		//æ£€ç´¢å®Œå…¨éƒ¨æ‹¬å·åï¼Œæ ˆç©ºè¯´æ˜åŒ¹é…æˆåŠŸ	
 }
 
-void InitStack(SqStack &S)		//³õÊ¼»¯Õ» 
+void InitStack(SqStack &S)		//åˆå§‹åŒ–æ ˆ 
 {
 	S.top=-1;		
 }
@@ -58,36 +58,36 @@ void DestroyStack(SqStack &S)
 	S.top=-1;
 }
 
-bool Push(SqStack &S,ElemType x)		//ÈëÕ»²Ù×÷ 
+bool Push(SqStack &S,ElemType x)		//å…¥æ ˆæ“ä½œ 
 {
-	if (StackFull(S))	return false;		//Õ»Âú£¬±¨´í
+	if (StackFull(S))	return false;		//æ ˆæ»¡ï¼ŒæŠ¥é”™
 	S.top=S.top+1;			
 	S.data[S.top]=x;					
 	return true; 			//<=> S.data[++S.top]=x;
  } 
 
-bool Pop(SqStack &S,ElemType &x)		//³öÕ»²Ù×÷ 
+bool Pop(SqStack &S,ElemType &x)		//å‡ºæ ˆæ“ä½œ 
 {
-	if (StackEmpty(S))	return false;	//Õ»¿Õ£¬±¨´í
+	if (StackEmpty(S))	return false;	//æ ˆç©ºï¼ŒæŠ¥é”™
 	x=S.data[S.top];	
 	S.top=S.top-1;			
 	return true;			//<=> x=S.data[S.top--]; 
 }
 
-bool GetTop(SqStack S,ElemType &x)		//¶ÁÕ»¶¥ÔªËØ 
+bool GetTop(SqStack S,ElemType &x)		//è¯»æ ˆé¡¶å…ƒç´  
 {
-	if (StackEmpty(S))	return false;	//Õ»¿Õ£¬±¨´í
+	if (StackEmpty(S))	return false;	//æ ˆç©ºï¼ŒæŠ¥é”™
 	x=S.data[S.top];			
 	return true;
 }
 
-bool StackEmpty(SqStack S)		//ÅĞ¶ÏÕ»¿Õ 
+bool StackEmpty(SqStack S)		//åˆ¤æ–­æ ˆç©º 
 {
 	if (S.top==-1)	return true;
 	else return false;		
 }
 
-bool StackFull(SqStack S)		//ÅĞ¶ÏÕ»Âú 
+bool StackFull(SqStack S)		//åˆ¤æ–­æ ˆæ»¡ 
 {
 	if (S.top==MaxSize-1)	return true;
 	else return false;		
