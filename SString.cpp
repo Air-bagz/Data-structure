@@ -1,18 +1,18 @@
-//¾²Ì¬Êı×éÊµÏÖ£¨¶¨³¤Ë³Ğò´æ´¢£© 
-#define MAXLEN 255		//Ô¤¶¨Òå×î´ó´®³¤Îª255
+//é™æ€æ•°ç»„å®ç°ï¼ˆå®šé•¿é¡ºåºå­˜å‚¨ï¼‰ 
+#define MAXLEN 255		//é¢„å®šä¹‰æœ€å¤§ä¸²é•¿ä¸º255
 typedef struct
 {
-	char ch[MAXLEN];	//Ã¿¸ö·ÖÁ¿´æ´¢Ò»¸ö×Ö·û,ch[0]·ÏÆú²»ÓÃ£¬Ê¹×Ö·ûÎ»ĞòºÍÊı×éÏÂ±êÏàÍ¬ 
-	int length;			//´®µÄÊµ¼Ê³¤¶È 
+	char ch[MAXLEN];	//æ¯ä¸ªåˆ†é‡å­˜å‚¨ä¸€ä¸ªå­—ç¬¦,ch[0]åºŸå¼ƒä¸ç”¨ï¼Œä½¿å­—ç¬¦ä½åºå’Œæ•°ç»„ä¸‹æ ‡ç›¸åŒ 
+	int length;			//ä¸²çš„å®é™…é•¿åº¦ 
  }SString; 
 
-bool SubString(SString &Sub,SString S,int pos,int len);	//Çó×Ó´®¡£ÓÃSub·µ»Ø´®SµÄµÚpos¸ö×Ö·ûÆğ³¤¶ÈÎ»lenµÄ×Ó´® 
-int StrCompare(SString S,SString T);	//±È½Ï²Ù×÷¡£ÈôS>T£¬Ôò·µ»ØÖµ>0£»ÈôS=T£¬Ôò·µ»ØÖµ=0£»ÈôS<T£¬Ôò·µ»ØÖµ<0 
-int Index(SString S,SString T);			//¶¨Î»²Ù×÷¡£ÈôÖ÷´®SÖĞ´æÔÚÓë´®TÖµÏàÍ¬µÄ×Ó´®£¬Ôò·µ»ØËüÔÚÖ÷´®SÖĞµÚÒ»´Î³öÏÖµÄÎ»ÖÃ£»·ñÔòº¯ÊıÖµÎª0 
+bool SubString(SString &Sub,SString S,int pos,int len);	//æ±‚å­ä¸²ã€‚ç”¨Subè¿”å›ä¸²Sçš„ç¬¬posä¸ªå­—ç¬¦èµ·é•¿åº¦ä½lençš„å­ä¸² 
+int StrCompare(SString S,SString T);	//æ¯”è¾ƒæ“ä½œã€‚è‹¥S>Tï¼Œåˆ™è¿”å›å€¼>0ï¼›è‹¥S=Tï¼Œåˆ™è¿”å›å€¼=0ï¼›è‹¥S<Tï¼Œåˆ™è¿”å›å€¼<0 
+int Index(SString S,SString T);			//å®šä½æ“ä½œã€‚è‹¥ä¸»ä¸²Sä¸­å­˜åœ¨ä¸ä¸²Tå€¼ç›¸åŒçš„å­ä¸²ï¼Œåˆ™è¿”å›å®ƒåœ¨ä¸»ä¸²Sä¸­ç¬¬ä¸€æ¬¡å‡ºç°çš„ä½ç½®ï¼›å¦åˆ™å‡½æ•°å€¼ä¸º0 
 
 bool SubString(SString &Sub,SString S,int pos,int len)
 {
-	//×Ó´®·¶Î§Ô½½ç 
+	//å­ä¸²èŒƒå›´è¶Šç•Œ 
 	if (pos+len-1>S.length)
 		return false;
 	for (int i=pos; i<pos+len; i++)
@@ -21,26 +21,26 @@ bool SubString(SString &Sub,SString S,int pos,int len)
 	return true;
 }
 
-int StrCompare(SString S,SString T)
+int StrCompare(SString S,SString T)				
 {
 	for (int i=1;i<=S.length && i<=T.length;i++)
 	{
 		if (S.ch[i]!=T.ch[i])
 		return S.ch[i]-T.ch[i];
 	}
-	//É¨Ãè¹ıµÄËùÓĞ×Ö·û¶¼ÏàÍ¬£¬Ôò³¤¶È³¤µÄ´®¸ü´ó
+	//æ‰«æè¿‡çš„æ‰€æœ‰å­—ç¬¦éƒ½ç›¸åŒï¼Œåˆ™é•¿åº¦é•¿çš„ä¸²æ›´å¤§
 	return S.length-T.length; 
  } 
 
-int Index(SString S,SString T)
+int Index(SString S,SString T)			//ä½¿ç”¨åŸºæœ¬æ“ä½œå®ç°æ¨¡å¼åŒ¹é…
 {
 	int i=1, n=StrLength(S), m=StrLength(T);
-	SString sub;	//ÓÃÓÚÔİ´æ×Ó´®
+	SString sub;	//ç”¨äºæš‚å­˜å­ä¸²
 	while (i<=n-m+1)
 	{
 		SubString(sub,S,i,m);
 		if (StrCompare(sub,T)!=0)	++i;
-		else return i;	//·µ»Ø×Ó´®ÔÚÖ÷´®ÖĞµÄÎ»ÖÃ 
+		else return i;	//è¿”å›å­ä¸²åœ¨ä¸»ä¸²ä¸­çš„ä½ç½® 
 	 } 
-	 return 0;	//SÖĞ²»´æÔÚÓëTÏàµÈµÄ×Ó´® 
+	 return 0;	//Sä¸­ä¸å­˜åœ¨ä¸Tç›¸ç­‰çš„å­ä¸² 
  } 
