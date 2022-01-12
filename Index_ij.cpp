@@ -1,5 +1,5 @@
-//ÆÓËØÄ£Ê½Æ¥ÅäËã·¨	Êı×éÏÂ±êÊµÏÖ
-#define MAXLEN 255		//Ô¤¶¨Òå×î´ó´®³¤Îª255
+//æœ´ç´ æ¨¡å¼åŒ¹é…ç®—æ³•	æ•°ç»„ä¸‹æ ‡å®ç°
+#define MAXLEN 255		//é¢„å®šä¹‰æœ€å¤§ä¸²é•¿ä¸º255
 typedef struct
 {
 	char ch[MAXLEN];	
@@ -14,11 +14,11 @@ int Index(SString S,SString T)
 		if (S.ch[i]==T.ch[j])
 		{
 			++i;
-			++j;		//¼ÌĞø±È½Ïºó¼Ì×Ö·û 
+			++j;		//ç»§ç»­æ¯”è¾ƒåç»§å­—ç¬¦ 
 		}
 		else {
-			i=i-j+2;
-			j=1;		//Ö¸ÕëºóÍËÖØĞÂ¿ªÊ¼Æ¥Åä 
+			i=i-j+2;		//ä¸»ä¸²æŒ‡é’ˆå›æº¯ 
+			j=1;		//æ¨¡å¼ä¸²æŒ‡é’ˆå›é€€åˆ°1 
 		}
 	}
 	if (j>T.length)
@@ -26,4 +26,28 @@ int Index(SString S,SString T)
 	else
 		return 0;
  } 
-//Ö÷´®³¤¶ÈÎªn,Ä£Ê½´®³¤¶ÈÎªm			O(nm) 
+//ä¸»ä¸²é•¿åº¦ä¸ºn,æ¨¡å¼ä¸²é•¿åº¦ä¸ºm			O(nm) 
+/*
+int Index(SString S,SString T)
+{
+	int k=1;
+	int i=k,j=1;
+	while (i<=S.length && j<=T.length)
+	{
+		if (S.ch[i]==T.ch[j])
+		{
+			++i;
+			++j;			//ç»§ç»­æ¯”è¾ƒåç»§å­—ç¬¦ 
+		}
+		else {
+			k++;		//æ£€æŸ¥ä¸‹ä¸€ä¸ªå­ä¸²
+			i=k;
+			j=1; 
+		}
+	}
+	if (j>T.length)
+		return k;
+	else 
+		return 0;
+}
+*/
