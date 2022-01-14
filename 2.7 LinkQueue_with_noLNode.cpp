@@ -1,4 +1,4 @@
-//²»´øÍ·½áµãµÄÁ´¶ÓÁĞ 
+//ä¸å¸¦å¤´ç»“ç‚¹çš„é“¾é˜Ÿåˆ— 
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -12,9 +12,9 @@ typedef struct LNode
 
 typedef struct
 {
-	LNode *front,*rear;		//µ¥Á´±íÖ»ĞèÒªÒ»¸öÍ·Ö¸ÕëLNode *L <=> LinkList L 
+	LNode *front,*rear;		//å•é“¾è¡¨åªéœ€è¦ä¸€ä¸ªå¤´æŒ‡é’ˆLNode *L <=> LinkList L 
 	//int length;
-}LinkQueue;				//Á´¶ÓÁĞĞèÒªÍ·Ö¸ÕëºÍÎ²Ö¸Õë
+}LinkQueue;				//é“¾é˜Ÿåˆ—éœ€è¦å¤´æŒ‡é’ˆå’Œå°¾æŒ‡é’ˆ
 
 void InitQueue(LinkQueue &Q);
 void EnQueue(LinkQueue &Q,ElemType x);
@@ -40,7 +40,7 @@ void testLinkQueue()
 
 void InitQueue(LinkQueue &Q)
 {
-	Q.front=Q.rear=NULL;		//³õÊ¼frontºÍrear¶¼Ö¸ÏòNULL
+	Q.front=Q.rear=NULL;		//åˆå§‹frontå’Œrearéƒ½æŒ‡å‘NULL
  } 
 
 void EnQueue(LinkQueue &Q,ElemType x)
@@ -48,34 +48,34 @@ void EnQueue(LinkQueue &Q,ElemType x)
 	LNode *s=(LNode *)malloc(sizeof(LNode));
 	s->data=x;
 	s->next=NULL;
-	if (Q.front==NULL)		//ÔÚ¿Õ¶ÓÁĞÖĞ²åÈëµÚÒ»¸öÔªËØ 
+	if (Q.front==NULL)		//åœ¨ç©ºé˜Ÿåˆ—ä¸­æ’å…¥ç¬¬ä¸€ä¸ªå…ƒç´  
 	{
-		Q.front=s;			//ĞŞ¸Ä¶ÓÍ·¶ÓÎ²Ö¸Õë 
+		Q.front=s;			//ä¿®æ”¹é˜Ÿå¤´é˜Ÿå°¾æŒ‡é’ˆ 
 		Q.rear=s;
 	}
 	else {
-		Q.rear->next=s;		//ĞÂ½áµã²åÈëµ½rear½áµãÖ®ºó 
-		Q.rear=s;			//ĞŞ¸ÄrearÖ¸Õë 
+		Q.rear->next=s;		//æ–°ç»“ç‚¹æ’å…¥åˆ°rearç»“ç‚¹ä¹‹å 
+		Q.rear=s;			//ä¿®æ”¹rearæŒ‡é’ˆ 
 	}
 }
 
 bool DeQueue(LinkQueue &Q,ElemType &x)
 {
-	if (IsEmpty(Q))	return false;		//¿Õ¶Ó
-	LNode *p=Q.front;					//pÖ¸Ïò´Ë´Î³ö¶ÓµÄ½áµã
-	x=p->data;							//ÓÃ±äÁ¿x·µ»Ø¶ÓÍ·ÔªËØ
-	Q.front=p->next;					//ĞŞ¸ÄfrontÖ¸Õë
-	if (Q.rear==p)						//´Ë´ÎÊÇ×îºóÒ»¸ö½áµã³ö¶Ó
+	if (IsEmpty(Q))	return false;		//ç©ºé˜Ÿ
+	LNode *p=Q.front;					//pæŒ‡å‘æ­¤æ¬¡å‡ºé˜Ÿçš„ç»“ç‚¹
+	x=p->data;							//ç”¨å˜é‡xè¿”å›é˜Ÿå¤´å…ƒç´ 
+	Q.front=p->next;					//ä¿®æ”¹frontæŒ‡é’ˆ
+	if (Q.rear==p)						//æ­¤æ¬¡æ˜¯æœ€åä¸€ä¸ªç»“ç‚¹å‡ºé˜Ÿ
 	{
-		Q.front=NULL;					//frontÖ¸ÏòNULL 
-		Q.rear=NULL;					//rearÖ¸ÏòNULL 
+		Q.front=NULL;					//frontæŒ‡å‘NULL 
+		Q.rear=NULL;					//rearæŒ‡å‘NULL 
 	 } 
-	free(p);							//ÊÍ·Å½áµã¿Õ¼ä 
+	free(p);							//é‡Šæ”¾ç»“ç‚¹ç©ºé—´ 
 	return true;
 }
 
 bool IsEmpty(LinkQueue Q)
 {
-	if (Q.front==NULL)	return true;	//»òÕßÅĞ¶ÏQ.rear==NULL 
+	if (Q.front==NULL)	return true;	//æˆ–è€…åˆ¤æ–­Q.rear==NULL 
 	else return false;
 }
