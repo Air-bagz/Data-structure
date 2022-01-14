@@ -55,7 +55,7 @@ void InitList(SqList &L)
 
 void DestroyList(SqList &L)
 {
-	L.length=0;
+	L.length=0;	//逻辑上删除
 	//系统自动回收空间 
 }
 
