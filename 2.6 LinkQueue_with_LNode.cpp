@@ -1,4 +1,4 @@
-//´øÍ·½áµãµÄÁ´¶ÓÁĞ 
+//å¸¦å¤´ç»“ç‚¹çš„é“¾é˜Ÿåˆ— 
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -12,9 +12,9 @@ typedef struct LNode
 
 typedef struct
 {
-	LNode *front,*rear;		//µ¥Á´±íÖ»ĞèÒªÒ»¸öÍ·Ö¸ÕëLNode *L <=> LinkList L 
+	LNode *front,*rear;		//å•é“¾è¡¨åªéœ€è¦ä¸€ä¸ªå¤´æŒ‡é’ˆLNode *L <=> LinkList L 
 	//int length;
-}LinkQueue;				//Á´¶ÓÁĞĞèÒªÍ·Ö¸ÕëºÍÎ²Ö¸Õë
+}LinkQueue;				//é“¾é˜Ÿåˆ—éœ€è¦å¤´æŒ‡é’ˆå’Œå°¾æŒ‡é’ˆ
 
 void InitQueue(LinkQueue &Q);
 void EnQueue(LinkQueue &Q,ElemType x); 
@@ -40,7 +40,7 @@ void testLinkQueue()
 
 void InitQueue(LinkQueue &Q)
 {
-	Q.front=Q.rear=(LNode *)malloc(sizeof(LNode));		//³õÊ¼frontºÍrear¶¼Ö¸ÏòÍ·½áµã 
+	Q.front=Q.rear=(LNode *)malloc(sizeof(LNode));		//åˆå§‹frontå’Œrearéƒ½æŒ‡å‘å¤´ç»“ç‚¹ 
 	Q.front->next=NULL;
  } 
 
@@ -48,24 +48,24 @@ void EnQueue(LinkQueue &Q,ElemType x)
 {
 	LNode *s=(LNode *)malloc(sizeof(LNode *));
 	s->data=x;
-	s->next=NULL;			//Èë¶ÓµÄ¿Ï¶¨ÊÇ×îºóÒ»¸ö
-	Q.rear->next=s;			//ĞÂ½áµã²åÈëµ½rearÖ®ºó
-	Q.rear=s;			//ĞŞ¸Ä±íÎ²Ö¸Õë 
+	s->next=NULL;			//å…¥é˜Ÿçš„è‚¯å®šæ˜¯æœ€åä¸€ä¸ª
+	Q.rear->next=s;			//æ–°ç»“ç‚¹æ’å…¥åˆ°rearä¹‹å
+	Q.rear=s;			//ä¿®æ”¹è¡¨å°¾æŒ‡é’ˆ 
 }
 
 bool DeQueue(LinkQueue &Q,ElemType &x) 
 {
-	if (IsEmpty(Q))	return false;	//¿Õ¶Ó
+	if (IsEmpty(Q))	return false;	//ç©ºé˜Ÿ
 	LNode *p=Q.front->next;
-	x=p->data;						//ÓÃ±äÁ¿x·µ»Ø¶ÓÍ·ÔªËØ 
-	Q.front->next=p->next;			//ĞŞ¸ÄÍ·½áµãµÄnextÖ¸Õë 
-	if (Q.rear==p)	Q.rear=Q.front;	//´Ë´ÎÊÇ×îºóÒ»¸ö½áµã³ö¶Ó£¬ĞŞ¸ÄrearÖ¸Õë 
-	free(p);						//ÊÍ·Å½áµã¿Õ¼ä 
+	x=p->data;						//ç”¨å˜é‡xè¿”å›é˜Ÿå¤´å…ƒç´  
+	Q.front->next=p->next;			//ä¿®æ”¹å¤´ç»“ç‚¹çš„nextæŒ‡é’ˆ 
+	if (Q.rear==p)	Q.rear=Q.front;	//æ­¤æ¬¡æ˜¯æœ€åä¸€ä¸ªç»“ç‚¹å‡ºé˜Ÿï¼Œä¿®æ”¹rearæŒ‡é’ˆ 
+	free(p);						//é‡Šæ”¾ç»“ç‚¹ç©ºé—´ 
 	return true; 
 }
 
 bool IsEmpty(LinkQueue Q)
 {
-	if (Q.front==Q.rear)	return true;	//»òÕßÅĞ¶ÏQ.front->next==NULL 
+	if (Q.front==Q.rear)	return true;	//æˆ–è€…åˆ¤æ–­Q.front->next==NULL 
 	else return false;
 }
