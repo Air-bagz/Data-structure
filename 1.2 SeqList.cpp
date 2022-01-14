@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-#define InitSize 10		
+#define InitSize 2
 typedef struct
 {
 	int *data;	 		
@@ -36,7 +36,6 @@ int main()
 	if (ListInsert(L,3,303))		printf("已将元素303插入位序3,插入成功\n");
 	else		printf("位序3不合法或顺序表已满,插入失败\n"); 
 	
-	IncreaseSize(L,5);	
 	printf("L.length=%d\n",L.length);
 	printf("L.MaxSize=%d\n",L.MaxSize);	
 	PrintList(L);
@@ -91,7 +90,8 @@ bool ListInsert(SeqList &L, int i, int e)
 	if (i<1||i>L.length+1)		
 		return false;
 	if (L.length>=L.MaxSize)		
-		return false;
+		//return false;
+		IncreaseSize(L,10);
 
 	for (int j=L.length; j>=i; j--)		
 		L.data[j]=L.data[j-1];		
