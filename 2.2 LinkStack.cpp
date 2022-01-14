@@ -1,4 +1,4 @@
-//´øÍ·½áµãµÄÁ´Õ» 
+//å¸¦å¤´ç»“ç‚¹çš„é“¾æ ˆ 
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -6,9 +6,9 @@ typedef int ElemType;
 
 typedef struct LNode
 {
-	ElemType data;				//Êı¾İÓò 
+	ElemType data;				//æ•°æ®åŸŸ 
 	struct LNode *next;
-}LNode,*LinkStack;				//Õ»ÀàĞÍ¶¨Òå 
+}LNode,*LinkStack;				//æ ˆç±»å‹å®šä¹‰ 
 
 void InitStack(LinkStack &S)
 {
