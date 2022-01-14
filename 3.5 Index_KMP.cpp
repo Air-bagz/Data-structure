@@ -1,5 +1,5 @@
-//KMPËã·¨	Êı×éÏÂ±êÊµÏÖ
-#define MAXLEN 255		//Ô¤¶¨Òå×î´ó´®³¤Îª255
+//KMPç®—æ³•	æ•°ç»„ä¸‹æ ‡å®ç°
+#define MAXLEN 255		//é¢„å®šä¹‰æœ€å¤§ä¸²é•¿ä¸º255
 typedef struct
 {
 	char ch[MAXLEN];	
@@ -14,15 +14,15 @@ int Index_KMP(SString S,SString T,int next[])
 		if (j==0 || S.ch[i]==T.ch[j])
 		{
 			++i;
-			++j;		//¼ÌĞø±È½Ïºó¼Ì×Ö·û 
+			++j;		//ç»§ç»­æ¯”è¾ƒåç»§å­—ç¬¦ 
 		}
 		else {
 			//i= 
-			j=next[j];		//Ä£Ê½´®ÏòÓÒÒÆ¶¯ 
+			j=next[j];		//æ¨¡å¼ä¸²å‘å³ç§»åŠ¨ 
 		}
 	}
 	if (j>T.length)
-		return i-T.length;		//Æ¥Åä³É¹¦ 
+		return i-T.length;		//åŒ¹é…æˆåŠŸ 
 	else
 		return 0;
  } 
