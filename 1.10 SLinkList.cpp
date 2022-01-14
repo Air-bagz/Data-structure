@@ -1,8 +1,8 @@
-#define MaxSize 10			//¾²Ì¬Á´±íµÄ×î´ó³¤¶È 
-typedef struct				//¾²Ì¬Á´±í½á¹¹ÀàĞÍµÄ¶¨Òå 
+#define MaxSize 10			//é™æ€é“¾è¡¨çš„æœ€å¤§é•¿åº¦ 
+typedef struct				//é™æ€é“¾è¡¨ç»“æ„ç±»å‹çš„å®šä¹‰ 
 {					
-	ElemType data;			//´æ´¢Êı¾İÔªËØ 
-	int next;				//ÏÂÒ»¸öÔªËØµÄÊı×éÏÂ±ê 
+	ElemType data;			//å­˜å‚¨æ•°æ®å…ƒç´  
+	int next;				//ä¸‹ä¸€ä¸ªå…ƒç´ çš„æ•°ç»„ä¸‹æ ‡ 
  }SLinkList[MaxSize]; 
  
 void testSLinkList()
@@ -13,13 +13,13 @@ void testSLinkList()
 
 void InitSLinkList(SLinkList &a)
 {
-	a[0].next=-1;					//Í·½áµãºóÃæÁ¬½ÓÎª¿Õ 
+	a[0].next=-1;					//å¤´ç»“ç‚¹åé¢è¿æ¥ä¸ºç©º 
 	for (int i=1;i<MaxSize;i++)
-		a[i].next=-2;				//±íÊ¾½áµã¿ÕÏĞ 
+		a[i].next=-2;				//è¡¨ç¤ºç»“ç‚¹ç©ºé—² 
 }
 
 /*
-·Ö±ğµÈ¼Û 
+åˆ†åˆ«ç­‰ä»· 
 struct Node
 {
 	ELemType data;
