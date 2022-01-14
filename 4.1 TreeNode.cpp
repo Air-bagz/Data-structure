@@ -6,12 +6,12 @@ typedef int ElemType;
 
 struct TreeNode
 {
-	ElemType value;		//½áµãÖĞµÄÊı¾İÔªËØ
-	char isEmpty;		//½áµãÊÇ·ñÎª¿Õ 
+	ElemType value;		//ç»“ç‚¹ä¸­çš„æ•°æ®å…ƒç´ 
+	char isEmpty;		//ç»“ç‚¹æ˜¯å¦ä¸ºç©º 
  };
-struct TreeNode t[MaxSize];		//´æ´¢ÍêÈ«¶ş²æÊ÷µÄ¸÷¸ö½áµã
-//¿Õ³öt[0]£¬±£Ö¤Êı×éÏÂ±êºÍ½áµã±àºÅÒ»ÖÂ
-//³õÊ¼»¯ËùÓĞ½áµã±ê¼ÇÎª¿Õ 
+struct TreeNode t[MaxSize];		//å­˜å‚¨å®Œå…¨äºŒå‰æ ‘çš„å„ä¸ªç»“ç‚¹
+//ç©ºå‡ºt[0]ï¼Œä¿è¯æ•°ç»„ä¸‹æ ‡å’Œç»“ç‚¹ç¼–å·ä¸€è‡´
+//åˆå§‹åŒ–æ‰€æœ‰ç»“ç‚¹æ ‡è®°ä¸ºç©º 
 
 int main()
 {
@@ -30,8 +30,8 @@ typedef int ElemType;
 
 typedef struct TreeNode
 {
-	ElemType value;		//½áµãÖĞµÄÊı¾İÔªËØ
-	char isEmpty;		//½áµãÊÇ·ñÎª¿Õ 
+	ElemType value;		//ç»“ç‚¹ä¸­çš„æ•°æ®å…ƒç´ 
+	char isEmpty;		//ç»“ç‚¹æ˜¯å¦ä¸ºç©º 
  }CoBiTree[MaxSize];
 
 int main()
