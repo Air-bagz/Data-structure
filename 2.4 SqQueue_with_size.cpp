@@ -8,7 +8,7 @@ typedef struct
 {
 	ElemType data[MaxSize];	
 	int front,rear; 		
-	int size; 				//¶ÓÁĞµ±Ç°³¤¶È 
+	int size; 				//é˜Ÿåˆ—å½“å‰é•¿åº¦ 
 }SqQueue;
 
 void InitQueue(SqQueue &Q);
@@ -41,20 +41,20 @@ void InitQueue(SqQueue &Q)
 	Q.size=0;
 }
 
-bool EnQueue(SqQueue &Q,ElemType x)		//Èë¶Ó 
+bool EnQueue(SqQueue &Q,ElemType x)		//å…¥é˜Ÿ 
 {
-	if (QueueFull(Q))	return false;		//¶ÓÂú±¨´í 
-	Q.data[Q.rear]=x;				//rearÖ¸ÏòÏÂÒ»¸öÓ¦¸Ã²åÈëµÄÎ»ÖÃ 
-	Q.rear=(Q.rear+1)%MaxSize;		//¶ÓÎ²Ö¸ÕëºóÒÆ£¬[0,1,...,MaxSize-1]»·×´ 
+	if (QueueFull(Q))	return false;		//é˜Ÿæ»¡æŠ¥é”™ 
+	Q.data[Q.rear]=x;				//rearæŒ‡å‘ä¸‹ä¸€ä¸ªåº”è¯¥æ’å…¥çš„ä½ç½® 
+	Q.rear=(Q.rear+1)%MaxSize;		//é˜Ÿå°¾æŒ‡é’ˆåç§»ï¼Œ[0,1,...,MaxSize-1]ç¯çŠ¶ 
 	Q.size++;
 	return true;
 }
 
 bool DeQueue(SqQueue &Q,ElemType &x)
 {
-	if (QueueEmpty(Q)) return false;		//¶Ó¿Õ±¨´í
-	x=Q.data[Q.front];				//frontÖ¸Ïò¶ÓÍ·ÔªËØ 
-	Q.front=(Q.front+1)%MaxSize; 	//¶ÓÍ·Ö¸ÕëºóÒÆ£¬»·×´ 
+	if (QueueEmpty(Q)) return false;		//é˜Ÿç©ºæŠ¥é”™
+	x=Q.data[Q.front];				//frontæŒ‡å‘é˜Ÿå¤´å…ƒç´  
+	Q.front=(Q.front+1)%MaxSize; 	//é˜Ÿå¤´æŒ‡é’ˆåç§»ï¼Œç¯çŠ¶ 
 	Q.size--;
 	return true;
 }
@@ -68,12 +68,12 @@ bool GetHead(SqQueue Q,ElemType &x)
 
 bool QueueEmpty(SqQueue Q)
 {
-	if (Q.size==0)	return true;	//¶Ó¿ÕÌõ¼ş 
+	if (Q.size==0)	return true;	//é˜Ÿç©ºæ¡ä»¶ 
 	else return false;
 }
 
 bool QueueFull(SqQueue Q)
 {
-	if ( Q.size==MaxSize )	return true;	//¶ÓÂúÌõ¼ş	ÎŞÎşÉü 
+	if ( Q.size==MaxSize )	return true;	//é˜Ÿæ»¡æ¡ä»¶	æ— ç‰ºç‰² 
 	else return false;
  } 
