@@ -7,7 +7,7 @@ typedef int ElemType;
 struct TreeNode
 {
 	ElemType value;		//结点中的数据元素
-	char isEmpty;		//结点是否为空 
+	bool isEmpty;		//结点是否为空 
  };
 struct TreeNode t[MaxSize];		//存储完全二叉树的各个结点
 //空出t[0]，保证数组下标和结点编号一致
@@ -31,7 +31,7 @@ typedef int ElemType;
 typedef struct TreeNode
 {
 	ElemType value;		//结点中的数据元素
-	char isEmpty;		//结点是否为空 
+	bool isEmpty;		//结点是否为空 
  }CoBiTree[MaxSize];
 
 int main()
