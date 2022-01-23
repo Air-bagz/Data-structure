@@ -1,42 +1,42 @@
-//ÎŞÏòÍ¼G£¬ÁÚ½Ó¾ØÕó´æ´¢£¬×ª»¯ÎªÁÚ½Ó±í£¬ÔÙ½øĞĞÉî¶ÈÓÅÏÈ±éÀú 			undirected graph
+//æ— å‘å›¾Gï¼Œé‚»æ¥çŸ©é˜µå­˜å‚¨ï¼Œè½¬åŒ–ä¸ºé‚»æ¥è¡¨ï¼Œå†è¿›è¡Œæ·±åº¦ä¼˜å…ˆéå† 			undirected graph
 #include<stdio.h>
 #include<stdlib.h>
 //------------------------------------------------------------------------------------
-#define MaxVertexNum 100					//¶¥µãÊıÄ¿µÄ×î´óÖµ 
+#define MaxVertexNum 100					//é¡¶ç‚¹æ•°ç›®çš„æœ€å¤§å€¼ 
 //------------------------------------------------------------------------------------
-//ÁÚ½Ó¾ØÕó·¨´æ´¢Í¼
+//é‚»æ¥çŸ©é˜µæ³•å­˜å‚¨å›¾
 typedef struct
 {
-	char Vex[MaxVertexNum];					//¶¥µã±í 
-	int Edge[MaxVertexNum][MaxVertexNum];	//ÁÚ½Ó¾ØÕó£¬±ß±í£»bool »ò Ã¶¾ÙÀàĞÍ 
-	int vexnum,arcnum;						//Í¼µÄµ±Ç°¶¥µãÊıºÍ±ßÊı/»¡Êı 
+	char Vex[MaxVertexNum];					//é¡¶ç‚¹è¡¨ 
+	int Edge[MaxVertexNum][MaxVertexNum];	//é‚»æ¥çŸ©é˜µï¼Œè¾¹è¡¨ï¼›bool æˆ– æšä¸¾ç±»å‹ 
+	int vexnum,arcnum;						//å›¾çš„å½“å‰é¡¶ç‚¹æ•°å’Œè¾¹æ•°/å¼§æ•° 
 }MGraph;
 //--------------------------------------------------------------------------------------
-//ÁÚ½Ó±í·¨ 
-typedef int VertexType;			//¶¥µãµÄÊı¾İÀàĞÍ 
-typedef int Infotype; 				//´øÈ¨Í¼ÖĞ±ßÉÏÈ¨ÖµµÄÊı¾İÀàĞÍ 
-//±ß±í½áµã 
+//é‚»æ¥è¡¨æ³• 
+typedef int VertexType;			//é¡¶ç‚¹çš„æ•°æ®ç±»å‹ 
+typedef int Infotype; 				//å¸¦æƒå›¾ä¸­è¾¹ä¸Šæƒå€¼çš„æ•°æ®ç±»å‹ 
+//è¾¹è¡¨ç»“ç‚¹ 
 typedef struct ArcNode		
 {
-	int adjvex;				//¸Ã»¡ËùÖ¸ÏòµÄ¶¥µãµÄÎ»ÖÃ 
-	struct ArcNode *nextarc;//Ö¸ÏòÏÂÒ»Ìõ»¡µÄÖ¸Õë 
-	Infotype info;		//ÍøµÄ±ßÈ¨Öµ 
+	int adjvex;				//è¯¥å¼§æ‰€æŒ‡å‘çš„é¡¶ç‚¹çš„ä½ç½® 
+	struct ArcNode *nextarc;//æŒ‡å‘ä¸‹ä¸€æ¡å¼§çš„æŒ‡é’ˆ 
+	Infotype info;		//ç½‘çš„è¾¹æƒå€¼ 
 }ArcNode; 
-//¶¥µã±í½áµã 
+//é¡¶ç‚¹è¡¨ç»“ç‚¹ 
 typedef struct VNode		
 {
-	VertexType data;		//¶¥µãĞÅÏ¢ 
-	ArcNode *firstarc;		//Ö¸ÏòµÚÒ»ÌõÒÀ¸½¸Ã¶¥µãµÄ»¡µÄÖ¸Õë 
+	VertexType data;		//é¡¶ç‚¹ä¿¡æ¯ 
+	ArcNode *firstarc;		//æŒ‡å‘ç¬¬ä¸€æ¡ä¾é™„è¯¥é¡¶ç‚¹çš„å¼§çš„æŒ‡é’ˆ 
  }VNode,AdjList[MaxVertexNum];
-//ÓÃÁÚ½Ó±í´æ´¢µÄÍ¼
+//ç”¨é‚»æ¥è¡¨å­˜å‚¨çš„å›¾
 typedef struct
 {
 	AdjList vertexs;	//vertices		vertexes		<=> VNode vertexs[MaxVertexNum];
-	int vexnum,arcnum;	//Í¼µÄ¶¥µãÊıºÍ»¡Êı 
+	int vexnum,arcnum;	//å›¾çš„é¡¶ç‚¹æ•°å’Œå¼§æ•° 
 }ALGraph;
 
-bool visited[MaxVertexNum];			//·ÃÎÊ±ê¼ÇÊı×é 
-ArcNode *r;		//Î²Ö¸Õë 
+bool visited[MaxVertexNum];			//è®¿é—®æ ‡è®°æ•°ç»„ 
+ArcNode *r;		//å°¾æŒ‡é’ˆ 
 //----------------------------------------------------------------------------------------
 void Graph_input(MGraph &G);
 void Graph_print(MGraph G);
@@ -61,10 +61,10 @@ int main()
 	ALGraph GG;		
 	MGraph_to_ALGraph(G,GG);
 	//ALGraph_Print(GG); 
-	beforeDFS(GG);	printf("´Ó¶¥µã%d³ö·¢µÃµ½µÄÉî¶ÈÓÅÏÈ±éÀúĞòÁĞ:",1);	DFS(GG,1);	printf("\n"); 
-	beforeDFS(GG);	printf("´Ó¶¥µã%d³ö·¢µÃµ½µÄÉî¶ÈÓÅÏÈ±éÀúĞòÁĞ:",2);	DFS(GG,2);	printf("\n");
- 	beforeDFS(GG);	printf("´Ó¶¥µã%d³ö·¢µÃµ½µÄÉî¶ÈÓÅÏÈ±éÀúĞòÁĞ:",3);	DFS(GG,3);	printf("\n");
-	//DFSTraverse(GG);		//Í¼GÊÇ·ÇÁ¬Í¨Í¼ÔÙÓÃ 
+	beforeDFS(GG);	printf("ä»é¡¶ç‚¹%då‡ºå‘å¾—åˆ°çš„æ·±åº¦ä¼˜å…ˆéå†åºåˆ—:",1);	DFS(GG,1);	printf("\n"); 
+	beforeDFS(GG);	printf("ä»é¡¶ç‚¹%då‡ºå‘å¾—åˆ°çš„æ·±åº¦ä¼˜å…ˆéå†åºåˆ—:",2);	DFS(GG,2);	printf("\n");
+ 	beforeDFS(GG);	printf("ä»é¡¶ç‚¹%då‡ºå‘å¾—åˆ°çš„æ·±åº¦ä¼˜å…ˆéå†åºåˆ—:",3);	DFS(GG,3);	printf("\n");
+	//DFSTraverse(GG);		//å›¾Gæ˜¯éè¿é€šå›¾å†ç”¨ 
 }
 
 void Graph_input(MGraph &G)
@@ -87,27 +87,27 @@ void Graph_print(MGraph G)
 	}
 }
 
-//ÇóÍ¼GÖĞ¶¥µãxµÄµÚÒ»¸öÁÚ½Óµã£¬ÈôÓĞÔò·µ»Ø¶¥µãºÅ¡£ÈôxÃ»ÓĞÁÚ½Óµã»òÍ¼ÖĞ²»´æÔÚx£¬Ôò·µ»Ø-1 
+//æ±‚å›¾Gä¸­é¡¶ç‚¹xçš„ç¬¬ä¸€ä¸ªé‚»æ¥ç‚¹ï¼Œè‹¥æœ‰åˆ™è¿”å›é¡¶ç‚¹å·ã€‚è‹¥xæ²¡æœ‰é‚»æ¥ç‚¹æˆ–å›¾ä¸­ä¸å­˜åœ¨xï¼Œåˆ™è¿”å›-1 
 int AM_FirstNeighbor(MGraph G,int x)
 {
 	for (int j=1; j<=G.vexnum; j++)
-		if (G.Edge[x][j]==1)	//ÓĞ±ß(x,j)	
+		if (G.Edge[x][j]==1)	//æœ‰è¾¹(x,j)	
 			return j;
-	return -1;	//xÃ»ÓĞÁÚ½Óµã
+	return -1;	//xæ²¡æœ‰é‚»æ¥ç‚¹
 }
 
-//¼ÙÉèÍ¼GÖĞ¶¥µãyÊÇ¶¥µãxµÄÒ»¸öÁÚ½Óµã£¬·µ»Ø³ıyÖ®Íâ¶¥µãxµÄÏÂÒ»¸öÁÚ½ÓµãµÄ¶¥µãºÅ£¬ÈôyÊÇxµÄ×îºóÒ»¸öÁÚ½Óµã£¬Ôò·µ»Ø-1 
+//å‡è®¾å›¾Gä¸­é¡¶ç‚¹yæ˜¯é¡¶ç‚¹xçš„ä¸€ä¸ªé‚»æ¥ç‚¹ï¼Œè¿”å›é™¤yä¹‹å¤–é¡¶ç‚¹xçš„ä¸‹ä¸€ä¸ªé‚»æ¥ç‚¹çš„é¡¶ç‚¹å·ï¼Œè‹¥yæ˜¯xçš„æœ€åä¸€ä¸ªé‚»æ¥ç‚¹ï¼Œåˆ™è¿”å›-1 
 int AM_NextNeighbor(MGraph G,int x,int y)
 {
 	for (int j=y+1; j<=G.vexnum; j++ )
-		if (G.Edge[x][j]==1)	//ÓĞ±ß(x,j)
+		if (G.Edge[x][j]==1)	//æœ‰è¾¹(x,j)
 			return j;
 	return -1; 
 }
 
-void MGraph_to_ALGraph(MGraph G,ALGraph &GG)	//Ïàµ±ÓÚ²»´øÍ·½áµãµÄÎ²²å·¨£¬ÏÈµ¥¶À´¦ÀíµÚÒ»¸ö£¬ 
+void MGraph_to_ALGraph(MGraph G,ALGraph &GG)	//ç›¸å½“äºä¸å¸¦å¤´ç»“ç‚¹çš„å°¾æ’æ³•ï¼Œå…ˆå•ç‹¬å¤„ç†ç¬¬ä¸€ä¸ªï¼Œ 
 {
-	ArcNode *r;		//Î²Ö¸Õë
+	ArcNode *r;		//å°¾æŒ‡é’ˆ
 	for (int i=1; i<=G.vexnum; i++)
 		{
 			GG.vertexs[i].data=i;
@@ -117,8 +117,8 @@ void MGraph_to_ALGraph(MGraph G,ALGraph &GG)	//Ïàµ±ÓÚ²»´øÍ·½áµãµÄÎ²²å·¨£¬ÏÈµ¥¶À´
 			{
 				GG.vertexs[i].firstarc=(ArcNode *)malloc(sizeof(ArcNode));
 				GG.vertexs[i].firstarc->adjvex=w;
-				GG.vertexs[i].firstarc->nextarc=NULL;	//´¦ÀíÍêµÚÒ»¸ö±ß 
-				r=GG.vertexs[i].firstarc;			//Î²Ö¸Õë³õÊ¼ 
+				GG.vertexs[i].firstarc->nextarc=NULL;	//å¤„ç†å®Œç¬¬ä¸€ä¸ªè¾¹ 
+				r=GG.vertexs[i].firstarc;			//å°¾æŒ‡é’ˆåˆå§‹ 
 				for (w=AM_NextNeighbor(G,i,w); w>0; w=AM_NextNeighbor(G,i,w))
 				{
 					ArcNode *s=(ArcNode *)malloc(sizeof(ArcNode));
@@ -134,7 +134,7 @@ void MGraph_to_ALGraph(MGraph G,ALGraph &GG)	//Ïàµ±ÓÚ²»´øÍ·½áµãµÄÎ²²å·¨£¬ÏÈµ¥¶À´
 
 void ALGraph_Print(ALGraph GG)
 {
-	printf("¶¥µã±í____±ß±í\n");
+	printf("é¡¶ç‚¹è¡¨____è¾¹è¡¨\n");
 	for (int i=1; i<=GG.vexnum; i++)
 	{
 		printf("[%d]:",GG.vertexs[i].data);
@@ -145,11 +145,11 @@ void ALGraph_Print(ALGraph GG)
 	}
 }
 //---------------------------------------------------------------------------------
-//DFSÖ®Ç°ĞèÒª³õÊ¼»¯±ê¼ÇÊı×é 
+//DFSä¹‹å‰éœ€è¦åˆå§‹åŒ–æ ‡è®°æ•°ç»„ 
 void beforeDFS(ALGraph GG)
 {
-	for (int i=1; i<=GG.vexnum; i++)		//½áµã±àºÅ´Ó1¿ªÊ¼
-		visited[i]=false;		//·ÃÎÊ±ê¼ÇÊı×é³õÊ¼»¯
+	for (int i=1; i<=GG.vexnum; i++)		//ç»“ç‚¹ç¼–å·ä»1å¼€å§‹
+		visited[i]=false;		//è®¿é—®æ ‡è®°æ•°ç»„åˆå§‹åŒ–
 }
 
 void visit(int v)
@@ -157,33 +157,33 @@ void visit(int v)
 	printf("%d ",v);
 }
 
-//Éî¶ÈÓÅÏÈ±éÀú
-void DFS(ALGraph GG,int v)	//´Ó¶¥µãv³ö·¢£¬Éî¶ÈÓÅÏÈ±éÀúÍ¼G 
+//æ·±åº¦ä¼˜å…ˆéå†
+void DFS(ALGraph GG,int v)	//ä»é¡¶ç‚¹vå‡ºå‘ï¼Œæ·±åº¦ä¼˜å…ˆéå†å›¾G 
 {
 	visit(v);
 	visited[v]=true;
 	for (ArcNode *w=AL_FirstNeighbor(GG,v); w!=NULL; w=AL_NextNeighbor(GG,v,w))
-			if (!visited[w->adjvex])	//wÎªvµÄÉĞÎ´·ÃÎÊµÄÁÚ½Ó¶¥µã 
+			if (!visited[w->adjvex])	//wä¸ºvçš„å°šæœªè®¿é—®çš„é‚»æ¥é¡¶ç‚¹ 
 			{
 				DFS(GG,w->adjvex);
 			 }//if  
 }
 
-void DFSTraverse(ALGraph GG)	//¶ÔÍ¼G½øĞĞÉî¶ÈÓÅÏÈ±éÀú 
+void DFSTraverse(ALGraph GG)	//å¯¹å›¾Gè¿›è¡Œæ·±åº¦ä¼˜å…ˆéå† 
 {
 	beforeDFS(GG);
-	for (int i=1; i<=GG.vexnum; i++)		//´Ó¶¥µã1¿ªÊ¼±éÀú 
+	for (int i=1; i<=GG.vexnum; i++)		//ä»é¡¶ç‚¹1å¼€å§‹éå† 
 		if (!visited[i])
 			DFS(GG,i);
 }
 
-//ÇóÍ¼GÖĞ¶¥µãxµÄµÚÒ»¸öÁÚ½Ó½áµã£¬·µ»Ø½áµãp£¬¿ÉÄÜÎª¿Õ 
+//æ±‚å›¾Gä¸­é¡¶ç‚¹xçš„ç¬¬ä¸€ä¸ªé‚»æ¥ç»“ç‚¹ï¼Œè¿”å›ç»“ç‚¹pï¼Œå¯èƒ½ä¸ºç©º 
 ArcNode *AL_FirstNeighbor(ALGraph GG,int x)
 {
 	return GG.vertexs[x].firstarc;	
 }
 
-//Í¼GÖĞ½áµãyÊÇ¶¥µãxµÄÒ»¸öÁÚ½Óµã£¬·µ»ØyµÄÏÂÒ»¸öÁÚ½Ó½áµã£¬¿ÉÄÜÎª¿Õ 
+//å›¾Gä¸­ç»“ç‚¹yæ˜¯é¡¶ç‚¹xçš„ä¸€ä¸ªé‚»æ¥ç‚¹ï¼Œè¿”å›yçš„ä¸‹ä¸€ä¸ªé‚»æ¥ç»“ç‚¹ï¼Œå¯èƒ½ä¸ºç©º 
 ArcNode *AL_NextNeighbor(ALGraph GG,int x,ArcNode *y)
 {
 	return y->nextarc; 
