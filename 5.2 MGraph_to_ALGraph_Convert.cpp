@@ -1,38 +1,38 @@
-//ÁÚ½Ó¾ØÕó°´ÕÕĞòºÅÔöĞò×ª»¯Î´ÁÚ½Ó±í£¬½¨Á¢±ß±íÊ¹ÓÃºó²å·¨£¬±£³ÖÁÚ½Ó¶¥µãĞòºÅµİÔö 
+//é‚»æ¥çŸ©é˜µæŒ‰ç…§åºå·å¢åºè½¬åŒ–æœªé‚»æ¥è¡¨ï¼Œå»ºç«‹è¾¹è¡¨ä½¿ç”¨åæ’æ³•ï¼Œä¿æŒé‚»æ¥é¡¶ç‚¹åºå·é€’å¢ 
 //MGraph G----->ALGraph GG
 #include<stdio.h>
 #include<stdlib.h>
-#define MaxVertexNum 100					//¶¥µãÊıÄ¿µÄ×î´óÖµ 
+#define MaxVertexNum 100					//é¡¶ç‚¹æ•°ç›®çš„æœ€å¤§å€¼ 
 //------------------------------------------------------------------------------------
-//ÁÚ½Ó¾ØÕó·¨´æ´¢Í¼
+//é‚»æ¥çŸ©é˜µæ³•å­˜å‚¨å›¾
 typedef struct
 {
-	char Vex[MaxVertexNum];					//¶¥µã±í 
-	int Edge[MaxVertexNum][MaxVertexNum];	//ÁÚ½Ó¾ØÕó£¬±ß±í£»bool »ò Ã¶¾ÙÀàĞÍ 
-	int vexnum,arcnum;						//Í¼µÄµ±Ç°¶¥µãÊıºÍ±ßÊı/»¡Êı 
+	char Vex[MaxVertexNum];					//é¡¶ç‚¹è¡¨ 
+	int Edge[MaxVertexNum][MaxVertexNum];	//é‚»æ¥çŸ©é˜µï¼Œè¾¹è¡¨ï¼›bool æˆ– æšä¸¾ç±»å‹ 
+	int vexnum,arcnum;						//å›¾çš„å½“å‰é¡¶ç‚¹æ•°å’Œè¾¹æ•°/å¼§æ•° 
 }MGraph;
 //--------------------------------------------------------------------------------------
-//ÁÚ½Ó±í·¨ 
-typedef int VertexType;			//¶¥µãµÄÊı¾İÀàĞÍ 
-typedef int Infotype; 				//´øÈ¨Í¼ÖĞ±ßÉÏÈ¨ÖµµÄÊı¾İÀàĞÍ 
-//±ß±í½áµã 
+//é‚»æ¥è¡¨æ³• 
+typedef int VertexType;			//é¡¶ç‚¹çš„æ•°æ®ç±»å‹ 
+typedef int Infotype; 				//å¸¦æƒå›¾ä¸­è¾¹ä¸Šæƒå€¼çš„æ•°æ®ç±»å‹ 
+//è¾¹è¡¨ç»“ç‚¹ 
 typedef struct ArcNode		
 {
-	int adjvex;				//¸Ã»¡ËùÖ¸ÏòµÄ¶¥µãµÄÎ»ÖÃ 
-	struct ArcNode *nextarc;//Ö¸ÏòÏÂÒ»Ìõ»¡µÄÖ¸Õë 
-	Infotype info;		//ÍøµÄ±ßÈ¨Öµ 
+	int adjvex;				//è¯¥å¼§æ‰€æŒ‡å‘çš„é¡¶ç‚¹çš„ä½ç½® 
+	struct ArcNode *nextarc;//æŒ‡å‘ä¸‹ä¸€æ¡å¼§çš„æŒ‡é’ˆ 
+	Infotype info;		//ç½‘çš„è¾¹æƒå€¼ 
 }ArcNode; 
-//¶¥µã±í½áµã 
+//é¡¶ç‚¹è¡¨ç»“ç‚¹ 
 typedef struct VNode		
 {
-	VertexType data;		//¶¥µãĞÅÏ¢ 
-	ArcNode *firstarc;		//Ö¸ÏòµÚÒ»ÌõÒÀ¸½¸Ã¶¥µãµÄ»¡µÄÖ¸Õë 
+	VertexType data;		//é¡¶ç‚¹ä¿¡æ¯ 
+	ArcNode *firstarc;		//æŒ‡å‘ç¬¬ä¸€æ¡ä¾é™„è¯¥é¡¶ç‚¹çš„å¼§çš„æŒ‡é’ˆ 
  }VNode,AdjList[MaxVertexNum];
-//ÓÃÁÚ½Ó±í´æ´¢µÄÍ¼
+//ç”¨é‚»æ¥è¡¨å­˜å‚¨çš„å›¾
 typedef struct
 {
 	AdjList vertexs;	//vertices		vertexes		<=> VNode vertexs[MaxVertexNum];
-	int vexnum,arcnum;	//Í¼µÄ¶¥µãÊıºÍ»¡Êı 
+	int vexnum,arcnum;	//å›¾çš„é¡¶ç‚¹æ•°å’Œå¼§æ•° 
 }ALGraph;
 //----------------------------------------------------------------------------------------
 
@@ -41,7 +41,7 @@ void Graph_print(MGraph G);
 int FirstNeighbor(MGraph G,int x);
 int NextNeighbor(MGraph G,int x,int y);
 void MGraph_to_ALGraph(MGraph G,ALGraph &GG);
-void Convert(ALGraph G,int n,int arcs[10][10]);  //ÍõµÀp214
+void Convert(ALGraph G,int n,int arcs[10][10]);  //ç‹é“p214
 
 int main()
 {
@@ -50,7 +50,7 @@ int main()
 	//Graph_print(G);
 	ALGraph GG;		GG.vexnum=G.vexnum;
 	MGraph_to_ALGraph(G,GG);
-	printf("¶¥µã±í____±ß±í\n");
+	printf("é¡¶ç‚¹è¡¨____è¾¹è¡¨\n");
 	for (int i=1; i<=G.vexnum; i++)
 	{
 		printf("[%d]:",GG.vertexs[i].data);
@@ -91,27 +91,27 @@ void Graph_print(MGraph G)
 	}
 }
 
-//ÇóÍ¼GÖĞ¶¥µãxµÄµÚÒ»¸öÁÚ½Óµã£¬ÈôÓĞÔò·µ»Ø¶¥µãºÅ¡£ÈôxÃ»ÓĞÁÚ½Óµã»òÍ¼ÖĞ²»´æÔÚx£¬Ôò·µ»Ø-1 
+//æ±‚å›¾Gä¸­é¡¶ç‚¹xçš„ç¬¬ä¸€ä¸ªé‚»æ¥ç‚¹ï¼Œè‹¥æœ‰åˆ™è¿”å›é¡¶ç‚¹å·ã€‚è‹¥xæ²¡æœ‰é‚»æ¥ç‚¹æˆ–å›¾ä¸­ä¸å­˜åœ¨xï¼Œåˆ™è¿”å›-1 
 int FirstNeighbor(MGraph G,int x)
 {
 	for (int j=1; j<=G.vexnum; j++)
-		if (G.Edge[x][j]==1)	//ÓĞ±ß(x,j)	
+		if (G.Edge[x][j]==1)	//æœ‰è¾¹(x,j)	
 			return j;
-	return -1;	//xÃ»ÓĞÁÚ½Óµã
+	return -1;	//xæ²¡æœ‰é‚»æ¥ç‚¹
 }
 
-//¼ÙÉèÍ¼GÖĞ¶¥µãyÊÇ¶¥µãxµÄÒ»¸öÁÚ½Óµã£¬·µ»Ø³ıyÖ®Íâ¶¥µãxµÄÏÂÒ»¸öÁÚ½ÓµãµÄ¶¥µãºÅ£¬ÈôyÊÇxµÄ×îºóÒ»¸öÁÚ½Óµã£¬Ôò·µ»Ø-1 
+//å‡è®¾å›¾Gä¸­é¡¶ç‚¹yæ˜¯é¡¶ç‚¹xçš„ä¸€ä¸ªé‚»æ¥ç‚¹ï¼Œè¿”å›é™¤yä¹‹å¤–é¡¶ç‚¹xçš„ä¸‹ä¸€ä¸ªé‚»æ¥ç‚¹çš„é¡¶ç‚¹å·ï¼Œè‹¥yæ˜¯xçš„æœ€åä¸€ä¸ªé‚»æ¥ç‚¹ï¼Œåˆ™è¿”å›-1 
 int NextNeighbor(MGraph G,int x,int y)
 {
 	for (int j=y+1; j<=G.vexnum; j++ )
-		if (G.Edge[x][j]==1)	//ÓĞ±ß(x,j)
+		if (G.Edge[x][j]==1)	//æœ‰è¾¹(x,j)
 			return j;
 	return -1; 
 }
 
-void MGraph_to_ALGraph(MGraph G,ALGraph &GG)	//Ïàµ±ÓÚ²»´øÍ·½áµãµÄÎ²²å·¨£¬ÏÈµ¥¶À´¦ÀíµÚÒ»¸ö£¬ 
+void MGraph_to_ALGraph(MGraph G,ALGraph &GG)	//ç›¸å½“äºä¸å¸¦å¤´ç»“ç‚¹çš„å°¾æ’æ³•ï¼Œå…ˆå•ç‹¬å¤„ç†ç¬¬ä¸€ä¸ªï¼Œ 
 {
-	ArcNode *r;		//Î²Ö¸Õë 
+	ArcNode *r;		//å°¾æŒ‡é’ˆ 
 	for (int i=1; i<=G.vexnum; i++)
 		{
 			GG.vertexs[i].data=i;
@@ -121,8 +121,8 @@ void MGraph_to_ALGraph(MGraph G,ALGraph &GG)	//Ïàµ±ÓÚ²»´øÍ·½áµãµÄÎ²²å·¨£¬ÏÈµ¥¶À´
 			{
 				GG.vertexs[i].firstarc=(ArcNode *)malloc(sizeof(ArcNode));
 				GG.vertexs[i].firstarc->adjvex=w;
-				GG.vertexs[i].firstarc->nextarc=NULL;	//´¦ÀíÍêµÚÒ»¸ö±ß 
-				r=GG.vertexs[i].firstarc;			//Î²Ö¸Õë³õÊ¼ 
+				GG.vertexs[i].firstarc->nextarc=NULL;	//å¤„ç†å®Œç¬¬ä¸€ä¸ªè¾¹ 
+				r=GG.vertexs[i].firstarc;			//å°¾æŒ‡é’ˆåˆå§‹ 
 				for (w=NextNeighbor(G,i,w); w>0; w=NextNeighbor(G,i,w))
 				{
 					ArcNode *s=(ArcNode *)malloc(sizeof(ArcNode));
@@ -135,16 +135,16 @@ void MGraph_to_ALGraph(MGraph G,ALGraph &GG)	//Ïàµ±ÓÚ²»´øÍ·½áµãµÄÎ²²å·¨£¬ÏÈµ¥¶À´
 		}//for
 }
 
-void Convert(ALGraph G,int n,int arcs[10][10])	//²Î¿¼ÍõµÀp214 
+void Convert(ALGraph G,int n,int arcs[10][10])	//å‚è€ƒç‹é“p214 
 {
-	//´ËËã·¨½«ÁÚ½Ó±í·½Ê½±íÊ¾µÄÍ¼G×ª»»ÎªÁÚ½Ó¾ØÕóarcs
+	//æ­¤ç®—æ³•å°†é‚»æ¥è¡¨æ–¹å¼è¡¨ç¤ºçš„å›¾Gè½¬æ¢ä¸ºé‚»æ¥çŸ©é˜µarcs
 	ArcNode *p;
-	for (int i=1; i<=n; i++)		//ÒÀ´Î±éÀú¸÷¶¥µã±í½áµãÎªÍ·µÄ±ßÁ´±í
+	for (int i=1; i<=n; i++)		//ä¾æ¬¡éå†å„é¡¶ç‚¹è¡¨ç»“ç‚¹ä¸ºå¤´çš„è¾¹é“¾è¡¨
 	{
-		p=(G.vertexs[i].firstarc);		//È¡³ö¶¥µãiµÄµÚÒ»Ìõ³ö±ß
-		while (p!=NULL)			//±éÀú±ßÁ´±í 
+		p=(G.vertexs[i].firstarc);		//å–å‡ºé¡¶ç‚¹içš„ç¬¬ä¸€æ¡å‡ºè¾¹
+		while (p!=NULL)			//éå†è¾¹é“¾è¡¨ 
 		{
-			arcs[i][p->adjvex]=1;//È¡ÏÂÒ»Ìõ³ö±ß 	G.Edge[][]
+			arcs[i][p->adjvex]=1;//å–ä¸‹ä¸€æ¡å‡ºè¾¹ 	G.Edge[][]
 			p=p->nextarc;
 		 }//while 
 	}//for
