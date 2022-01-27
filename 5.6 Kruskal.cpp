@@ -2,4 +2,4 @@
 
 weight		Vertex1		Vertex2
 
-//���鼯 
+//²¢²é¼¯ 
