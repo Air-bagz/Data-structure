@@ -1,27 +1,27 @@
-//Critical Path _ AOV
+//Critical Path _ AOE
 #include<stdio.h>
 #include<limits.h>
 #include<string.h>		//memset
 //------------------------------------------------------------------------------------
-//ÁÚ½Ó¾ØÕó·¨´æ´¢´øÈ¨Í¼£¨Íø£© 
-#define MaxVertexNum 10				//¶¥µãÊıÄ¿µÄ×î´óÖµ 
-#define MaxArcNum 34		//±ßÊıÄ¿µÄ×î´óÖµ 
+//é‚»æ¥çŸ©é˜µæ³•å­˜å‚¨å¸¦æƒå›¾ï¼ˆç½‘ï¼‰ 
+#define MaxVertexNum 10				//é¡¶ç‚¹æ•°ç›®çš„æœ€å¤§å€¼ 
+#define MaxArcNum 34		//è¾¹æ•°ç›®çš„æœ€å¤§å€¼ 
 
-typedef char VertexType;					//¶¥µãµÄÊı¾İÀàĞÍ 
-typedef int EdgeType; 						//´øÈ¨Í¼ÖĞ±ßÉÏÈ¨ÖµµÄÊı¾İÀàĞÍ 
+typedef char VertexType;					//é¡¶ç‚¹çš„æ•°æ®ç±»å‹ 
+typedef int EdgeType; 						//å¸¦æƒå›¾ä¸­è¾¹ä¸Šæƒå€¼çš„æ•°æ®ç±»å‹ 
 typedef struct
 {
-	VertexType Vex[MaxVertexNum];					//¶¥µã 
-	EdgeType Edge[MaxVertexNum][MaxVertexNum];		//±ßµÄÈ¨ 
-	int vexnum,arcnum;								//Í¼µÄµ±Ç°¶¥µãÊıºÍ±ßÊı/»¡Êı 
+	VertexType Vex[MaxVertexNum];					//é¡¶ç‚¹ 
+	EdgeType Edge[MaxVertexNum][MaxVertexNum];		//è¾¹çš„æƒ 
+	int vexnum,arcnum;								//å›¾çš„å½“å‰é¡¶ç‚¹æ•°å’Œè¾¹æ•°/å¼§æ•° 
 }MGraph;
 //--------------------------------------------------------------------------------------
 typedef int ElemType;
-#define MaxSize 10				//¶¨ÒåÕ»ÖĞÔªËØµÄ×î´ó¸öÊı 
+#define MaxSize 10				//å®šä¹‰æ ˆä¸­å…ƒç´ çš„æœ€å¤§ä¸ªæ•° 
 typedef struct
 {
-	ElemType data[MaxSize];		//¾²Ì¬Êı×é´æ·ÅÕ»ÖĞÔªËØ 
-	int top;					//Õ»¶¥Ö¸Õë 
+	ElemType data[MaxSize];		//é™æ€æ•°ç»„å­˜æ”¾æ ˆä¸­å…ƒç´  
+	int top;					//æ ˆé¡¶æŒ‡é’ˆ 
  }SqStack;
  
 
@@ -54,28 +54,28 @@ void seek_l(MGraph G);
 void seek_d(MGraph G);
 void Critical_Activity_and_critical_path(MGraph G);
 //----------------------------------------------------------------------------------------
-int indegree[MaxVertexNum];		//indegree[i] ¶¥µãiµÄÈë¶È
-int Topo_Order[MaxVertexNum];		//¼ÇÂ¼ÍØÆËĞòÁĞTopo_Order[1]---Topo_Order[count]; 
-SqStack S_in;					//±£´æÈë¶ÈÎª0µÄ¶¥µã£¨Ò²¿ÉÓÃ¶ÓÁĞ£© 
+int indegree[MaxVertexNum];		//indegree[i] é¡¶ç‚¹içš„å…¥åº¦
+int Topo_Order[MaxVertexNum];		//è®°å½•æ‹“æ‰‘åºåˆ—Topo_Order[1]---Topo_Order[count]; 
+SqStack S_in;					//ä¿å­˜å…¥åº¦ä¸º0çš„é¡¶ç‚¹ï¼ˆä¹Ÿå¯ç”¨é˜Ÿåˆ—ï¼‰ 
 
-int outdegree[MaxVertexNum];		//outdegree[i] ¶¥µãiµÄ³ö¶È
-int ReTopo_Order[MaxVertexNum];		//¼ÇÂ¼ÄæÍØÆËĞòÁĞReTopo_Order[1]---ReTopo_Order[count]; 
-SqStack S_out;					//±£´æ³ö¶ÈÎª0µÄ¶¥µã£¨Ò²¿ÉÓÃ¶ÓÁĞ£© 
+int outdegree[MaxVertexNum];		//outdegree[i] é¡¶ç‚¹içš„å‡ºåº¦
+int ReTopo_Order[MaxVertexNum];		//è®°å½•é€†æ‹“æ‰‘åºåˆ—ReTopo_Order[1]---ReTopo_Order[count]; 
+SqStack S_out;					//ä¿å­˜å‡ºåº¦ä¸º0çš„é¡¶ç‚¹ï¼ˆä¹Ÿå¯ç”¨é˜Ÿåˆ—ï¼‰ 
 
-int ve[MaxVertexNum];	//¸÷¸ö¶¥µã(ÊÂ¼ş)µÄ×îÔç·¢ÉúÊ±¼ä 
-int vl[MaxVertexNum];	//¸÷¸ö¶¥µã(ÊÂ¼ş)µÄ×î³Ù·¢ÉúÊ±¼ä 
+int ve[MaxVertexNum];	//å„ä¸ªé¡¶ç‚¹(äº‹ä»¶)çš„æœ€æ—©å‘ç”Ÿæ—¶é—´ 
+int vl[MaxVertexNum];	//å„ä¸ªé¡¶ç‚¹(äº‹ä»¶)çš„æœ€è¿Ÿå‘ç”Ÿæ—¶é—´ 
 
-int e[MaxArcNum];	//¸÷¸ö±ß(»î¶¯)µÄ×îÔç·¢ÉúÊ±¼ä 
-int l[MaxArcNum]; 	//¸÷¸ö±ß(»î¶¯)µÄ×î³Ù·¢ÉúÊ±¼ä 
+int e[MaxArcNum];	//å„ä¸ªè¾¹(æ´»åŠ¨)çš„æœ€æ—©å‘ç”Ÿæ—¶é—´ 
+int l[MaxArcNum]; 	//å„ä¸ªè¾¹(æ´»åŠ¨)çš„æœ€è¿Ÿå‘ç”Ÿæ—¶é—´ 
 
-int d[MaxArcNum];	//¸÷¸ö±ß(»î¶¯)µÄÊ±¼äÓàÁ¿ 
+int d[MaxArcNum];	//å„ä¸ªè¾¹(æ´»åŠ¨)çš„æ—¶é—´ä½™é‡ 
 
-typedef struct 	ArcNode			//ÕâÀï²»ÄÜĞ´ Edge_Weight_List ÁË 
+typedef struct 	ArcNode			//è¿™é‡Œä¸èƒ½å†™ Edge_Weight_List äº† 
 {
-	int k;	//»¡Î² 
-	int j;	//»¡Í·		k-->j
-	int weight;	//È¨ÖØ 
-}ArcNode,Edge_Weight_List[MaxArcNum];	//±ßÈ¨±í 
+	int k;	//å¼§å°¾ 
+	int j;	//å¼§å¤´		k-->j
+	int weight;	//æƒé‡ 
+}ArcNode,Edge_Weight_List[MaxArcNum];	//è¾¹æƒè¡¨ 
 
 Edge_Weight_List E;			//ArcNode E[MaxArcNum]; 
 //----------------------------------------------------------------------------------------
@@ -88,42 +88,42 @@ int main()
 	Init_indegree_print(G);
 	if ( TopologicalSort(G) )
 	{
-		printf("ÍØÆËÅÅĞò³É¹¦,ÍØÆËĞòÁĞÎª:");
+		printf("æ‹“æ‰‘æ’åºæˆåŠŸ,æ‹“æ‰‘åºåˆ—ä¸º:");
 		for (int i=1; i<=G.vexnum; i++)
 			printf("%d ",Topo_Order[i]);
 		printf("\n");
 	}
-	else printf("ÍØÆËÅÅĞòÊ§°Ü£¬ÓĞÏòÍ¼ÖĞÓĞ»ØÂ·\n");
+	else printf("æ‹“æ‰‘æ’åºå¤±è´¥ï¼Œæœ‰å‘å›¾ä¸­æœ‰å›è·¯\n");
 	
 	Init_outdegree_print(G);
 	if ( ReTopologicalSort(G) )
 	{
-		printf("ÄæÍØÆËÅÅĞò³É¹¦,ÄæÍØÆËĞòÁĞÎª:");
+		printf("é€†æ‹“æ‰‘æ’åºæˆåŠŸ,é€†æ‹“æ‰‘åºåˆ—ä¸º:");
 		for (int i=1; i<=G.vexnum; i++)
 			printf("%d ",ReTopo_Order[i]);
 		printf("\n");
 	}
-	else printf("ÄæÍØÆËÅÅĞòÊ§°Ü£¬ÓĞÏòÍ¼ÖĞÓĞ»ØÂ·\n");
+	else printf("é€†æ‹“æ‰‘æ’åºå¤±è´¥ï¼Œæœ‰å‘å›¾ä¸­æœ‰å›è·¯\n");
 	
-	//1.°´ÕÕÍØÆËÅÅĞòĞòÁĞµÄË³Ğò£¬Çó¸÷¸ö¶¥µãµÄ×îÔç·¢ÉúÊ±¼äve[]
+	//1.æŒ‰ç…§æ‹“æ‰‘æ’åºåºåˆ—çš„é¡ºåºï¼Œæ±‚å„ä¸ªé¡¶ç‚¹çš„æœ€æ—©å‘ç”Ÿæ—¶é—´ve[]
 	seek_ve(G); 
 	
-	//2.°´ÕÕÄæÍØÆËÅÅĞòĞòÁĞµÄË³Ğò£¬Çó¸÷¸ö¶¥µãµÄ×î³Ù·¢ÉúÊ±¼ävl[]
+	//2.æŒ‰ç…§é€†æ‹“æ‰‘æ’åºåºåˆ—çš„é¡ºåºï¼Œæ±‚å„ä¸ªé¡¶ç‚¹çš„æœ€è¿Ÿå‘ç”Ÿæ—¶é—´vl[]
 	seek_vl(G);
 	
-	//ÓÉÁÚ½Ó¾ØÕóµÃµ½¶¥µãĞòºÅµ¥ÔöµÄ±ßÈ¨±íE[]£¬ÓĞ±ßĞòÁĞÒÀ¾İ 
+	//ç”±é‚»æ¥çŸ©é˜µå¾—åˆ°é¡¶ç‚¹åºå·å•å¢çš„è¾¹æƒè¡¨E[]ï¼Œæœ‰è¾¹åºåˆ—ä¾æ® 
 	EWL(G); 
 	
-	//3.°´ÕÕ±ßĞòÁĞ£¬ÓÉ¶¥µãµÄve[]ÇóËùÓĞ±ß(»î¶¯)µÄ×îÔç·¢ÉúÊ±¼äe[] 
+	//3.æŒ‰ç…§è¾¹åºåˆ—ï¼Œç”±é¡¶ç‚¹çš„ve[]æ±‚æ‰€æœ‰è¾¹(æ´»åŠ¨)çš„æœ€æ—©å‘ç”Ÿæ—¶é—´e[] 
 	seek_e(G);
 	
-	//4.°´ÕÕ±ßĞòÁĞ£¬ÓÉ¶¥µãµÄvl[]ºÍ±ßÈ¨ÇóËùÓĞ±ß(»î¶¯)µÄ×î³Ù·¢ÉúÊ±¼äl[] 
+	//4.æŒ‰ç…§è¾¹åºåˆ—ï¼Œç”±é¡¶ç‚¹çš„vl[]å’Œè¾¹æƒæ±‚æ‰€æœ‰è¾¹(æ´»åŠ¨)çš„æœ€è¿Ÿå‘ç”Ÿæ—¶é—´l[] 
 	seek_l(G); 
 	
-	//5.°´ÕÕ±ßĞòÁĞ£¬ÓÉ±ßµÄe[]ºÍl[]Çó±ß(»î¶¯)µÄÊ±¼äÓàÁ¿d[]
+	//5.æŒ‰ç…§è¾¹åºåˆ—ï¼Œç”±è¾¹çš„e[]å’Œl[]æ±‚è¾¹(æ´»åŠ¨)çš„æ—¶é—´ä½™é‡d[]
 	seek_d(G);
 	
-	//Ğ´³ö¹Ø¼ü»î¶¯ºÍ¹Ø¼üÂ·¾¶ 
+	//å†™å‡ºå…³é”®æ´»åŠ¨å’Œå…³é”®è·¯å¾„ 
 	Critical_Activity_and_critical_path(G);
 	
 	return 0; 
@@ -171,28 +171,28 @@ void Graph_print(MGraph G)
 int FirstNeighbor_xj(MGraph G,int x)
 {
 	for (int j=1; j<=G.vexnum; j++)     
-		if (G.Edge[x][j]>0 && G.Edge[x][j]<INT_MAX)	//xĞĞÕÒ ³ö±ß<x,j>	
+		if (G.Edge[x][j]>0 && G.Edge[x][j]<INT_MAX)	//xè¡Œæ‰¾ å‡ºè¾¹<x,j>	
 			return j;
-	return -1;	//xÃ»ÓĞÁÚ½Óµã
+	return -1;	//xæ²¡æœ‰é‚»æ¥ç‚¹
 }
 
 int NextNeighbor_xj(MGraph G,int x,int y)
 {
 	for (int j=y+1; j<=G.vexnum; j++)	
-		if (G.Edge[x][j]>0 && G.Edge[x][j]<INT_MAX)	//xĞĞÕÒ ³ö±ß<x,j>
+		if (G.Edge[x][j]>0 && G.Edge[x][j]<INT_MAX)	//xè¡Œæ‰¾ å‡ºè¾¹<x,j>
 			return j;
 	return -1; 
 }
 
 void Init_indegree_print(MGraph G)
 {
-	memset(indegree,0,sizeof(indegree));	//ÏÈÇåÁã 
+	memset(indegree,0,sizeof(indegree));	//å…ˆæ¸…é›¶ 
 	for (int i=1; i<=G.vexnum; i++)
 		for (int j=1; j<=G.vexnum; j++)
 		{
 			//printf("%d",G.Edge[j][i]);
 			if (G.Edge[j][i]>0 && G.Edge[j][i]<INT_MAX)
-				indegree[i]++;		//µÚiÁĞÕıÊı¸öÊıÊÇ ¶¥µãiµÄÈë¶È 
+				indegree[i]++;		//ç¬¬iåˆ—æ­£æ•°ä¸ªæ•°æ˜¯ é¡¶ç‚¹içš„å…¥åº¦ 
 		}
 	memset(Topo_Order,-1,sizeof(Topo_Order));
 //	for (int i=1; i<=G.vexnum; i++)
@@ -201,55 +201,55 @@ void Init_indegree_print(MGraph G)
 
 bool TopologicalSort(MGraph G)
 {
-	InitStack(S_in);		//³õÊ¼»¯Õ»£¬´æ´¢Èë¶ÈÎª0µÄ¶¥µã
+	InitStack(S_in);		//åˆå§‹åŒ–æ ˆï¼Œå­˜å‚¨å…¥åº¦ä¸º0çš„é¡¶ç‚¹
 	for (int i=1; i<=G.vexnum; i++)
 		if (indegree[i]==0)
-			Push(S_in,i);		//½«ËùÓĞÈë¶ÈÎª0µÄ¶¥µã½øÕ»
-	int count=0;			//¼ÆÊı£¬¼ÇÂ¼µ±Ç°ÒÑ¾­Êä³öµÄ¶¥µãÊı 
+			Push(S_in,i);		//å°†æ‰€æœ‰å…¥åº¦ä¸º0çš„é¡¶ç‚¹è¿›æ ˆ
+	int count=0;			//è®¡æ•°ï¼Œè®°å½•å½“å‰å·²ç»è¾“å‡ºçš„é¡¶ç‚¹æ•° 
 	int i;
-	while (!StackEmpty(S_in))		//Õ»²»¿Õ£¬Ôò´æÔÚÈë¶ÈÎª0µÄ¶¥µã 
+	while (!StackEmpty(S_in))		//æ ˆä¸ç©ºï¼Œåˆ™å­˜åœ¨å…¥åº¦ä¸º0çš„é¡¶ç‚¹ 
 	{
-		Pop(S_in,i);			//Õ»¶¥ÔªËØ³öÕ» 
+		Pop(S_in,i);			//æ ˆé¡¶å…ƒç´ å‡ºæ ˆ 
 		count++;
-		Topo_Order[count]=i;		//Êä³ö¶¥µãi 
+		Topo_Order[count]=i;		//è¾“å‡ºé¡¶ç‚¹i 
 		for (int p=FirstNeighbor_xj(G,i); p>0; p=NextNeighbor_xj(G,i,p))
-		{//½«ËùÓĞiÖ¸ÏòµÄ¶¥µãµÄÈë¶È¼õ1£¬²¢ÇÒ½«Èë¶È¼õÎª0µÄ¶¥µãÑ¹ÈëÕ»S 
+		{//å°†æ‰€æœ‰iæŒ‡å‘çš„é¡¶ç‚¹çš„å…¥åº¦å‡1ï¼Œå¹¶ä¸”å°†å…¥åº¦å‡ä¸º0çš„é¡¶ç‚¹å‹å…¥æ ˆS 
 			int v=p;
 			if (!(--indegree[v]))
-				Push(S_in,v);		//Èë¶ÈÎª0£¬ÔòÈëÕ» 
+				Push(S_in,v);		//å…¥åº¦ä¸º0ï¼Œåˆ™å…¥æ ˆ 
 		}
 	 } //while
 	 if (count<G.vexnum)
-	 	return false;		//ÅÅĞòÊ§°Ü£¬ÓĞÏòÍ¼ÖĞÓĞ»ØÂ· 
+	 	return false;		//æ’åºå¤±è´¥ï¼Œæœ‰å‘å›¾ä¸­æœ‰å›è·¯ 
 	else
-		return true;		//ÍØÆËÅÅĞò³É¹¦ 
+		return true;		//æ‹“æ‰‘æ’åºæˆåŠŸ 
  } 
 //---------------------------------------------------------------------------------------- 
 int FirstNeighbor_jx(MGraph G,int x)
 {
 	for (int j=1; j<=G.vexnum; j++)   
-		if (G.Edge[j][x]>0 && G.Edge[j][x]<INT_MAX)	//Èë±ß<j,x>	
+		if (G.Edge[j][x]>0 && G.Edge[j][x]<INT_MAX)	//å…¥è¾¹<j,x>	
 			return j;
-	return -1;	//xÃ»ÓĞÁÚ½Óµã
+	return -1;	//xæ²¡æœ‰é‚»æ¥ç‚¹
 }
 
 int NextNeighbor_jx(MGraph G,int x,int y)
 {
 	for (int j=y+1; j<=G.vexnum; j++)	 
-		if (G.Edge[j][x]>0 && G.Edge[j][x]<INT_MAX)	//Èë±ß<j,x>
+		if (G.Edge[j][x]>0 && G.Edge[j][x]<INT_MAX)	//å…¥è¾¹<j,x>
 			return j;
 	return -1; 
 }
 
 void Init_outdegree_print(MGraph G)
 {
-	memset(outdegree,0,sizeof(outdegree));	//ÏÈÇåÁã 
+	memset(outdegree,0,sizeof(outdegree));	//å…ˆæ¸…é›¶ 
 	for (int i=1; i<=G.vexnum; i++)
 		for (int j=1; j<=G.vexnum; j++)
 		{
 			//printf("%d",G.Edge[j][i]);
 			if (G.Edge[i][j]>0 && G.Edge[i][j]<INT_MAX)
-				outdegree[i]++;		//µÚiĞĞÕıÊı¸öÊıÊÇ ¶¥µãiµÄ³ö¶È 
+				outdegree[i]++;		//ç¬¬iè¡Œæ­£æ•°ä¸ªæ•°æ˜¯ é¡¶ç‚¹içš„å‡ºåº¦ 
 		}
 	memset(ReTopo_Order,-1,sizeof(ReTopo_Order));
 //	for (int i=1; i<=G.vexnum; i++)
@@ -258,73 +258,73 @@ void Init_outdegree_print(MGraph G)
 
 bool ReTopologicalSort(MGraph G)
 {
-	InitStack(S_out);		//³õÊ¼»¯Õ»£¬´æ´¢³ö¶ÈÎª0µÄ¶¥µã
+	InitStack(S_out);		//åˆå§‹åŒ–æ ˆï¼Œå­˜å‚¨å‡ºåº¦ä¸º0çš„é¡¶ç‚¹
 	for (int i=1; i<=G.vexnum; i++)
 		if (outdegree[i]==0)
-			Push(S_out,i);		//½«ËùÓĞ³ö¶ÈÎª0µÄ¶¥µã½øÕ»
-	int count=0;			//¼ÆÊı£¬¼ÇÂ¼µ±Ç°ÒÑ¾­Êä³öµÄ¶¥µãÊı 
+			Push(S_out,i);		//å°†æ‰€æœ‰å‡ºåº¦ä¸º0çš„é¡¶ç‚¹è¿›æ ˆ
+	int count=0;			//è®¡æ•°ï¼Œè®°å½•å½“å‰å·²ç»è¾“å‡ºçš„é¡¶ç‚¹æ•° 
 	int i;
-	while (!StackEmpty(S_out))		//Õ»²»¿Õ£¬Ôò´æÔÚÈë¶ÈÎª0µÄ¶¥µã 
+	while (!StackEmpty(S_out))		//æ ˆä¸ç©ºï¼Œåˆ™å­˜åœ¨å…¥åº¦ä¸º0çš„é¡¶ç‚¹ 
 	{
-		Pop(S_out,i);			//Õ»¶¥ÔªËØ³öÕ» 
+		Pop(S_out,i);			//æ ˆé¡¶å…ƒç´ å‡ºæ ˆ 
 		count++;
-		ReTopo_Order[count]=i;		//Êä³ö¶¥µãi 
-		for (int p=FirstNeighbor_jx(G,i); p>0; p=NextNeighbor_jx(G,i,p))	//Èô±àºÅ´Ó0¿ªÊ¼£¬±ØĞë>=0 
-		{//½«ËùÓĞÖ¸ÏòiµÄ¶¥µãµÄ³ö¶È¼õ1£¬Èô¼õÎª0ÔòÑ¹ÈëÕ»S 
+		ReTopo_Order[count]=i;		//è¾“å‡ºé¡¶ç‚¹i 
+		for (int p=FirstNeighbor_jx(G,i); p>0; p=NextNeighbor_jx(G,i,p))	//è‹¥ç¼–å·ä»0å¼€å§‹ï¼Œå¿…é¡»>=0 
+		{//å°†æ‰€æœ‰æŒ‡å‘içš„é¡¶ç‚¹çš„å‡ºåº¦å‡1ï¼Œè‹¥å‡ä¸º0åˆ™å‹å…¥æ ˆS 
 			int v=p;
 			if (!(--outdegree[v]))
-				Push(S_out,v);		//³ö¶ÈÎª0£¬ÔòÈëÕ» 
+				Push(S_out,v);		//å‡ºåº¦ä¸º0ï¼Œåˆ™å…¥æ ˆ 
 		}
 	 } //while
 	 if (count<G.vexnum)
-	 	return false;		//ÄæÅÅĞòÊ§°Ü£¬ÓĞÏòÍ¼ÖĞÓĞ»ØÂ· 
+	 	return false;		//é€†æ’åºå¤±è´¥ï¼Œæœ‰å‘å›¾ä¸­æœ‰å›è·¯ 
 	else
-		return true;		//ÄæÍØÆËÅÅĞò³É¹¦ 
+		return true;		//é€†æ‹“æ‰‘æ’åºæˆåŠŸ 
  } 
 //----------------------------------------------------------------------------------------
-void InitStack(SqStack &S)		//³õÊ¼»¯Õ» 
+void InitStack(SqStack &S)		//åˆå§‹åŒ–æ ˆ 
 {
-	S.top=-1;		//³õÊ¼»¯Õ»¶¥Ö¸Õë 
+	S.top=-1;		//åˆå§‹åŒ–æ ˆé¡¶æŒ‡é’ˆ 
 }
 
-bool Push(SqStack &S,ElemType x)		//ÈëÕ»²Ù×÷ 
+bool Push(SqStack &S,ElemType x)		//å…¥æ ˆæ“ä½œ 
 {
-	if ( StackFull(S) )	return false;		//Õ»Âú£¬±¨´í
-	S.top=S.top+1;			//Ö¸ÕëÏÈ+1 
-	S.data[S.top]=x;		//ĞÂÔªËØÈëÕ»				
+	if ( StackFull(S) )	return false;		//æ ˆæ»¡ï¼ŒæŠ¥é”™
+	S.top=S.top+1;			//æŒ‡é’ˆå…ˆ+1 
+	S.data[S.top]=x;		//æ–°å…ƒç´ å…¥æ ˆ				
 	return true; 			//<=> S.data[++S.top]=x;
  } 
 
-bool Pop(SqStack &S,ElemType &x)		//³öÕ»²Ù×÷ 
+bool Pop(SqStack &S,ElemType &x)		//å‡ºæ ˆæ“ä½œ 
 {
-	if ( StackEmpty(S) )	return false;	//Õ»¿Õ£¬±¨´í
-	x=S.data[S.top];		//Õ»¶¥ÔªËØÏÈ³öÕ» 
-	S.top=S.top-1;			//Ö¸ÕëÔÙ¼õ1 
+	if ( StackEmpty(S) )	return false;	//æ ˆç©ºï¼ŒæŠ¥é”™
+	x=S.data[S.top];		//æ ˆé¡¶å…ƒç´ å…ˆå‡ºæ ˆ 
+	S.top=S.top-1;			//æŒ‡é’ˆå†å‡1 
 	return true;			//<=> x=S.data[S.top--]; 
 }
 
-bool StackEmpty(SqStack S)		//ÅĞ¶ÏÕ»¿Õ 
+bool StackEmpty(SqStack S)		//åˆ¤æ–­æ ˆç©º 
 {
-	if (S.top==-1)	return true;	//Õ»¿Õ 
-	else return false;			//²»¿Õ 
+	if (S.top==-1)	return true;	//æ ˆç©º 
+	else return false;			//ä¸ç©º 
 }
 
-bool StackFull(SqStack S)		//ÅĞ¶ÏÕ»Âú 
+bool StackFull(SqStack S)		//åˆ¤æ–­æ ˆæ»¡ 
 {
-	if (S.top==MaxSize-1)	return true;	//Õ»Âú 
-	else return false;			//²»Âú 
+	if (S.top==MaxSize-1)	return true;	//æ ˆæ»¡ 
+	else return false;			//ä¸æ»¡ 
 }
 //----------------------------------------------------------------------------------------
 void seek_ve(MGraph G)
 {
-	memset(ve,0,sizeof(ve));	//³õÊ¼»¯veÎª×îĞ¡Ê±¿Ì0 
-	ve[Topo_Order[1]]=0;			//ve(Ô´µã)=0 		Ô´µãÊÇÍØÆËµÚÒ»¸ö 
-	for (int i=2; i<=G.vexnum; i++)		//ÍØÆËĞòÁĞµÚ¶ş¸öµ½×îºóÒ»¸ö 
+	memset(ve,0,sizeof(ve));	//åˆå§‹åŒ–veä¸ºæœ€å°æ—¶åˆ»0 
+	ve[Topo_Order[1]]=0;			//ve(æºç‚¹)=0 		æºç‚¹æ˜¯æ‹“æ‰‘ç¬¬ä¸€ä¸ª 
+	for (int i=2; i<=G.vexnum; i++)		//æ‹“æ‰‘åºåˆ—ç¬¬äºŒä¸ªåˆ°æœ€åä¸€ä¸ª 
 	{
-		int k=Topo_Order[i];   //µãvk 
-		for (int j=1; j<=G.vexnum; j++)	//µãvkµÄ×îÔç·¢ÉúÊ±¼ä´ÓÇ°ÇıËã 
+		int k=Topo_Order[i];   //ç‚¹vk 
+		for (int j=1; j<=G.vexnum; j++)	//ç‚¹vkçš„æœ€æ—©å‘ç”Ÿæ—¶é—´ä»å‰é©±ç®— 
 		{
-			if (G.Edge[j][k]>0 && G.Edge[j][k]<INT_MAX) //vjÊÇvkµÄÇ°Çı   <vj,vk> 
+			if (G.Edge[j][k]>0 && G.Edge[j][k]<INT_MAX) //vjæ˜¯vkçš„å‰é©±   <vj,vk> 
 				ve[k]=ve[j]+G.Edge[j][k] > ve[k] ? ve[j]+G.Edge[j][k] : ve[k];
 		}		//ve(k) = Max{ ve(j) + Weight(vk,vj) }
 	}
@@ -337,14 +337,14 @@ void seek_ve(MGraph G)
 void seek_vl(MGraph G)
 {
 	for (int i=1; i<=G.vexnum; i++)
-		vl[i]=INT_MAX; 	//³õÊ¼»¯vlÎª×îÍíÊ±¿ÌINT_MAX 
-	vl[ReTopo_Order[1]]=ve[ReTopo_Order[1]];	//vl(»ãµã)=ve(»ãµã)		»ãµãÊÇÄæÍØÆËµÚÒ»¸ö 
-	for (int i=2; i<=G.vexnum; i++)		//ÄæÍØÆËĞòÁĞµÚ¶ş¸öµ½×îºóÒ»¸ö
+		vl[i]=INT_MAX; 	//åˆå§‹åŒ–vlä¸ºæœ€æ™šæ—¶åˆ»INT_MAX 
+	vl[ReTopo_Order[1]]=ve[ReTopo_Order[1]];	//vl(æ±‡ç‚¹)=ve(æ±‡ç‚¹)		æ±‡ç‚¹æ˜¯é€†æ‹“æ‰‘ç¬¬ä¸€ä¸ª 
+	for (int i=2; i<=G.vexnum; i++)		//é€†æ‹“æ‰‘åºåˆ—ç¬¬äºŒä¸ªåˆ°æœ€åä¸€ä¸ª
 	{
-		int k=ReTopo_Order[i];   //µãvk
-		for (int j=1; j<=G.vexnum; j++)	//µãvkµÄ×î³Ù·¢ÉúÊ±¼ä´Óºó¼ÌËã
+		int k=ReTopo_Order[i];   //ç‚¹vk
+		for (int j=1; j<=G.vexnum; j++)	//ç‚¹vkçš„æœ€è¿Ÿå‘ç”Ÿæ—¶é—´ä»åç»§ç®—
 		{
-			if (G.Edge[k][j]>0 && G.Edge[k][j]<INT_MAX) //vjÊÇvkµÄºó¼Ì   <vk,vj> 
+			if (G.Edge[k][j]>0 && G.Edge[k][j]<INT_MAX) //vjæ˜¯vkçš„åç»§   <vk,vj> 
 				vl[k]=vl[j]-G.Edge[k][j] < vl[k] ? vl[j]-G.Edge[k][j] : vl[k];
 		 } 		//vl(k)=Min{vl(j)-Weight(vk,vj)}
 	 } 
@@ -354,12 +354,12 @@ void seek_vl(MGraph G)
 	printf("\n");
 }
 
-void EWL(MGraph G)		//±ßÈ¨±í 
+void EWL(MGraph G)		//è¾¹æƒè¡¨ 
 {
-	int count=0;		//µ±Ç°»î¶¯ 
+	int count=0;		//å½“å‰æ´»åŠ¨ 
 	for (int k=1; k<=G.vexnum; k++)
 		for (int j=1; j<=G.vexnum; j++) 
-			if (G.Edge[k][j]>0 && G.Edge[k][j]<INT_MAX) //±ß<vk,vj>±íÊ¾»î¶¯ai
+			if (G.Edge[k][j]>0 && G.Edge[k][j]<INT_MAX) //è¾¹<vk,vj>è¡¨ç¤ºæ´»åŠ¨ai
 			{
 				count++;
 				E[count].weight=G.Edge[k][j]; 
@@ -372,9 +372,9 @@ void EWL(MGraph G)		//±ßÈ¨±í
 	printf("\n");
 }
 
-void seek_e(MGraph G)	//ÁÚ½Ó¾ØÕó´æ´¢£¬Ò»ĞĞĞĞ±éÀú¿ÉÒÔ±£Ö¤±ßµÄ¶¥µã±àºÅµ¥µ÷Ôö £¬´Ó¶ø¶ÔÓ¦±ß 
+void seek_e(MGraph G)	//é‚»æ¥çŸ©é˜µå­˜å‚¨ï¼Œä¸€è¡Œè¡Œéå†å¯ä»¥ä¿è¯è¾¹çš„é¡¶ç‚¹ç¼–å·å•è°ƒå¢ ï¼Œä»è€Œå¯¹åº”è¾¹ 
 {
-	for (int i=1; i<=G.arcnum; i++)	//±ß<vk,vj>±íÊ¾»î¶¯ai
+	for (int i=1; i<=G.arcnum; i++)	//è¾¹<vk,vj>è¡¨ç¤ºæ´»åŠ¨ai
 		e[i]=ve[ E[i].k ];	//e(i)=ve(k)
 	printf("e[1--8]:");
 	for (int i=1; i<=G.arcnum; i++)
@@ -382,9 +382,9 @@ void seek_e(MGraph G)	//ÁÚ½Ó¾ØÕó´æ´¢£¬Ò»ĞĞĞĞ±éÀú¿ÉÒÔ±£Ö¤±ßµÄ¶¥µã±àºÅµ¥µ÷Ôö £¬´Ó¶
 	printf("\n");
 }
 
-void seek_l(MGraph G)	//ÁÚ½Ó¾ØÕó´æ´¢£¬Ò»ĞĞĞĞ±éÀú¿ÉÒÔ±£Ö¤±ßµÄ¶¥µã±àºÅµ¥µ÷Ôö £¬´Ó¶ø¶ÔÓ¦±ß 
+void seek_l(MGraph G)	//é‚»æ¥çŸ©é˜µå­˜å‚¨ï¼Œä¸€è¡Œè¡Œéå†å¯ä»¥ä¿è¯è¾¹çš„é¡¶ç‚¹ç¼–å·å•è°ƒå¢ ï¼Œä»è€Œå¯¹åº”è¾¹ 
 {
-	for (int i=1; i<=G.arcnum; i++)	//±ß<vk,vj>±íÊ¾»î¶¯ai
+	for (int i=1; i<=G.arcnum; i++)	//è¾¹<vk,vj>è¡¨ç¤ºæ´»åŠ¨ai
 		l[i]=vl[ E[i].j ]-E[i].weight;	//l(i)=vl(j)-weight(vk,vj)
 	printf("l[1--8]:");
 	for (int i=1; i<=G.arcnum; i++)
