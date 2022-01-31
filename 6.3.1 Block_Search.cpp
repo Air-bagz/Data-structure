@@ -1,13 +1,13 @@
-//·Ö¿é²éÕÒ£º¿éÄÚÎŞĞò¡¢¿é¼äÓĞĞò
-//1.Ë÷Òı±í Ë³Ğò²éÕÒ  or  ÕÛ°ë²éÕÒ
-//2.¿éÄÚ   Ë³Ğò²éÕÒ 
+//åˆ†å—æŸ¥æ‰¾ï¼šå—å†…æ— åºã€å—é—´æœ‰åº
+//1.ç´¢å¼•è¡¨ é¡ºåºæŸ¥æ‰¾  or  æŠ˜åŠæŸ¥æ‰¾
+//2.å—å†…   é¡ºåºæŸ¥æ‰¾ 
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
 
 typedef int ElemType;
 
-//Ë÷Òı±í 
+//ç´¢å¼•è¡¨ 
 typedef struct
 {
 	ElemType maxValue;
@@ -16,11 +16,11 @@ typedef struct
  
 typedef struct
 {
-	IndexList Index;			//IndexNode Index[100];		Ë÷Òı±í 
+	IndexList Index;			//IndexNode Index[100];		ç´¢å¼•è¡¨ 
 	int Index_len;
-	ElemType List[100];		//Ë³Ğò±í´æ´¢Êµ¼ÊÔªËØ 
+	ElemType List[100];		//é¡ºåºè¡¨å­˜å‚¨å®é™…å…ƒç´  
 	int List_len;
-}BSList;		//·Ö¿é²éÕÒ±í 
+}BSList;		//åˆ†å—æŸ¥æ‰¾è¡¨ 
 
 void InitList(BSList &L);
 void show(BSList L);
@@ -34,20 +34,20 @@ void Block_Search2(BSList L,ElemType key);
 int main()
 {
 	BSList L;
-	InitList(L);	//¶ÁÈëË÷Òı±íºÍË³Ğò±í 
+	InitList(L);	//è¯»å…¥ç´¢å¼•è¡¨å’Œé¡ºåºè¡¨ 
 	show(L);
-//	int key;	//²éÕÒÄ¿±ê 
-	Block_Search(L,22);	//pdfÀı×Ó 
-	Block_Search(L,29);	//pdfÀı×Ó 
-	Block_Search(L,50);	//²âÊÔ×î´óµÄÒ»¸ö
-	Block_Search(L,51); //²âÊÔ³¬³ö×î´ó
-	Block_Search(L,7);	//²âÊÔ×îĞ¡ 
-	Block_Search(L,6);	//²âÊÔĞ¡ÓÚ×îĞ¡ 
+//	int key;	//æŸ¥æ‰¾ç›®æ ‡ 
+	Block_Search(L,22);	//pdfä¾‹å­ 
+	Block_Search(L,29);	//pdfä¾‹å­ 
+	Block_Search(L,50);	//æµ‹è¯•æœ€å¤§çš„ä¸€ä¸ª
+	Block_Search(L,51); //æµ‹è¯•è¶…å‡ºæœ€å¤§
+	Block_Search(L,7);	//æµ‹è¯•æœ€å° 
+	Block_Search(L,6);	//æµ‹è¯•å°äºæœ€å° 
 //------------------------------------------------------------------ 
-printf("------------------------------ÏÂÃæÊÇÕÛ°ë²éÕÒË÷Òı±í---------------------------\n");
-	Block_Search2(L,30);//pdfÀı×Ó	
-	Block_Search2(L,19);//pdfÀı×Ó
-	Block_Search2(L,54);//pdfÀı×Ó
+printf("------------------------------ä¸‹é¢æ˜¯æŠ˜åŠæŸ¥æ‰¾ç´¢å¼•è¡¨---------------------------\n");
+	Block_Search2(L,30);//pdfä¾‹å­	
+	Block_Search2(L,19);//pdfä¾‹å­
+	Block_Search2(L,54);//pdfä¾‹å­
 	return 0; 
 }
 
@@ -77,38 +77,38 @@ void show(BSList L)
 	printf("\n"); 
 }
 
-//Ë³Ğò²éÕÒË÷Òı±í ²¢ ·µ»Ø¿éºÅ£¨´Ó0¿ªÊ¼£© 
+//é¡ºåºæŸ¥æ‰¾ç´¢å¼•è¡¨ å¹¶ è¿”å›å—å·ï¼ˆä»0å¼€å§‹ï¼‰ 
 int Seq_Search_Index(BSList L,ElemType key)	
 {
 	int i=0;
 	while (i<L.Index_len && key>L.Index[i].maxValue)			
 		i++;
-	return i;		//²éÕÒ³É¹¦·µ»ØiËùÖ¸·Ö¿é£¬µ±key´óÓÚËùÓĞË÷ÒıÖµ»á·µ»ØL.Index_len 
+	return i;		//æŸ¥æ‰¾æˆåŠŸè¿”å›iæ‰€æŒ‡åˆ†å—ï¼Œå½“keyå¤§äºæ‰€æœ‰ç´¢å¼•å€¼ä¼šè¿”å›L.Index_len 
  } 
 
-//¿éÄÚË³Ğò²éÕÒ ²¢ ·µ»ØÊı×éÏÂ±ê 
+//å—å†…é¡ºåºæŸ¥æ‰¾ å¹¶ è¿”å›æ•°ç»„ä¸‹æ ‡ 
 int Seq_Search_Block(BSList L,ElemType key,int point)
 {
 	for (int i=L.Index[point].low; i<=L.Index[point].high; i++)		
 		if (L.List[i]==key)	
 			return i;
-	return -1;		//Ë³Ğò²éÕÒÊ§°Ü 
+	return -1;		//é¡ºåºæŸ¥æ‰¾å¤±è´¥ 
 }
 
 void Block_Search(BSList L,ElemType key)
 {
-	int point=Seq_Search_Index(L,key);	//Ë³Ğò²éÕÒË÷Òı±í	·µ»Ø¿éºÅ	point_block   
-	printf("ÄãµÄ²éÕÒÄ¿±êÎª:%d\n",key);
+	int point=Seq_Search_Index(L,key);	//é¡ºåºæŸ¥æ‰¾ç´¢å¼•è¡¨	è¿”å›å—å·	point_block   
+	printf("ä½ çš„æŸ¥æ‰¾ç›®æ ‡ä¸º:%d\n",key);
 //	printf("%d %d",L.Index[point].low,L.Index[point].high);
 	if (point==L.Index_len)	
-		printf("Äã¸øµÄÊıÌ«´óÁË,³¬³öÁËË÷Òı±íµÄ·¶Î§!\n");
+		printf("ä½ ç»™çš„æ•°å¤ªå¤§äº†,è¶…å‡ºäº†ç´¢å¼•è¡¨çš„èŒƒå›´!\n");
 	else 
 		{	
-			int loca=Seq_Search_Block(L,key,point);		//¿éÄÚË³Ğò²éÕÒ
+			int loca=Seq_Search_Block(L,key,point);		//å—å†…é¡ºåºæŸ¥æ‰¾
 			if (loca==-1)	
-				printf("Ê§°ÜÁË,ÕÒ²»µ½ÄãµÄ%d\n",key);
+				printf("å¤±è´¥äº†,æ‰¾ä¸åˆ°ä½ çš„%d\n",key);
 			else 
-				printf("ÕÒµ½ÁË!ÊÇË³Ğò±íµÄL[%d]\n",loca);
+				printf("æ‰¾åˆ°äº†!æ˜¯é¡ºåºè¡¨çš„L[%d]\n",loca);
 		}
 }
 //----------------------------------------------------------------------------------------
@@ -117,30 +117,30 @@ int Binary_Search_Index(BSList L,ElemType key)
 	int low=0,high=L.Index_len-1,mid;
 	while (low<=high)
 	{
-		mid=(low+high)/2;			//È¡ÖĞ¼äÎ»ÖÃ 
+		mid=(low+high)/2;			//å–ä¸­é—´ä½ç½® 
 		if (L.Index[mid].maxValue==key)		
-			return	mid;			//²éÕÒ³É¹¦Ôò·µ»ØÔªËØÏÂ±ê 
+			return	mid;			//æŸ¥æ‰¾æˆåŠŸåˆ™è¿”å›å…ƒç´ ä¸‹æ ‡ 
 		else if (L.Index[mid].maxValue>key)
-			high=mid-1;				//´ÓÇ°°ë²¿·Ö¼ÌĞø²éÕÒ 
+			high=mid-1;				//ä»å‰åŠéƒ¨åˆ†ç»§ç»­æŸ¥æ‰¾ 
 		else 
-			low=mid+1;				//´Óºó°ë²¿·Ö¼ÌĞø²éÕÒ 
+			low=mid+1;				//ä»ååŠéƒ¨åˆ†ç»§ç»­æŸ¥æ‰¾ 
 	}
-	return low;				//ÈôË÷Òı±í²»°üº¬Ä¿±ê¹Ø¼ü×Ö£¬×îÖÕ»áÍ£ÔÚlow>high£¬ÒªÔÚlowËùÖ¸·Ö¿éÄÚ²éÕÒ
+	return low;				//è‹¥ç´¢å¼•è¡¨ä¸åŒ…å«ç›®æ ‡å…³é”®å­—ï¼Œæœ€ç»ˆä¼šåœåœ¨low>highï¼Œè¦åœ¨lowæ‰€æŒ‡åˆ†å—å†…æŸ¥æ‰¾
 }
 
 void Block_Search2(BSList L,ElemType key)
 {
-	int point=Binary_Search_Index(L,key);	//ÕÛ°ë²éÕÒË÷Òı±í	·µ»Ø¿éºÅ	point_block  
-	printf("ÄãµÄ²éÕÒÄ¿±êÎª:%d\n",key);
+	int point=Binary_Search_Index(L,key);	//æŠ˜åŠæŸ¥æ‰¾ç´¢å¼•è¡¨	è¿”å›å—å·	point_block  
+	printf("ä½ çš„æŸ¥æ‰¾ç›®æ ‡ä¸º:%d\n",key);
 //	printf("%d %d",L.Index[point].low,L.Index[point].high);
 	if (point==L.Index_len)	
-		printf("Äã¸øµÄÊıÌ«´óÁË,³¬³öÁËË÷Òı±íµÄ·¶Î§!\n");
+		printf("ä½ ç»™çš„æ•°å¤ªå¤§äº†,è¶…å‡ºäº†ç´¢å¼•è¡¨çš„èŒƒå›´!\n");
 	else 
 		{	
-			int loca=Seq_Search_Block(L,key,point);		//¿éÄÚË³Ğò²éÕÒ
+			int loca=Seq_Search_Block(L,key,point);		//å—å†…é¡ºåºæŸ¥æ‰¾
 			if (loca==-1)	
-				printf("Ê§°ÜÁË,ÕÒ²»µ½ÄãµÄ%d\n",key);
+				printf("å¤±è´¥äº†,æ‰¾ä¸åˆ°ä½ çš„%d\n",key);
 			else 
-				printf("ÕÒµ½ÁË!ÊÇË³Ğò±íµÄL[%d]\n",loca);
+				printf("æ‰¾åˆ°äº†!æ˜¯é¡ºåºè¡¨çš„L[%d]\n",loca);
 		}
 }
