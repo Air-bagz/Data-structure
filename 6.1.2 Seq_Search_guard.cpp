@@ -4,10 +4,10 @@
 #define InitSize 20
 typedef int ElemType;
 
-typedef struct			//²éÕÒ±íµÄÊı¾İ½á¹¹(Ë³Ğò±í) 
+typedef struct			//æŸ¥æ‰¾è¡¨çš„æ•°æ®ç»“æ„(é¡ºåºè¡¨) 
 {
-	ElemType *elem;		//¶¯Ì¬Êı×é»ùÖ· 
-	int Len;			//±íµÄ³¤¶È 
+	ElemType *elem;		//åŠ¨æ€æ•°ç»„åŸºå€ 
+	int Len;			//è¡¨çš„é•¿åº¦ 
 }SeqTable;
 
 int Seq_Search(SeqTable ST,ElemType key);
@@ -17,19 +17,19 @@ int main()
 {
 	SeqTable ST;
 	InitTable(ST);
-	printf("66ÔªËØµÄÏÂ±êÎª:%d\n",Seq_Search(ST,66));
-	printf("41ÔªËØµÄÏÂ±êÎª:%d\n",Seq_Search(ST,41));
+	printf("66å…ƒç´ çš„ä¸‹æ ‡ä¸º:%d\n",Seq_Search(ST,66));
+	printf("41å…ƒç´ çš„ä¸‹æ ‡ä¸º:%d\n",Seq_Search(ST,41));
 	return 0;
 }
 
-//Ë³Ğò²éÕÒ
+//é¡ºåºæŸ¥æ‰¾
 int Seq_Search(SeqTable ST,ElemType key)
 {
 	ST.elem[0]=key;		//guard
 	int i=ST.Len;
-	while (ST.elem[i]!=key)		//ÎŞĞèÅĞ¶ÏÊÇ·ñÔ½½ç 
+	while (ST.elem[i]!=key)		//æ— éœ€åˆ¤æ–­æ˜¯å¦è¶Šç•Œ 
 		i--;
-	return i; 		//²éÕÒ³É¹¦£¬Ôò·µ»ØÔªËØÏÂ±ê£»²éÕÒÊ§°Ü£¬Ôò·µ»Ø0
+	return i; 		//æŸ¥æ‰¾æˆåŠŸï¼Œåˆ™è¿”å›å…ƒç´ ä¸‹æ ‡ï¼›æŸ¥æ‰¾å¤±è´¥ï¼Œåˆ™è¿”å›0
  } 
  
 void InitTable(SeqTable &ST)
@@ -40,6 +40,6 @@ void InitTable(SeqTable &ST)
 	FILE *fp;
 	fp=fopen("Z:\\Seq_Search.txt","r");
 	fscanf(fp,"%d",&ST.Len);	
-	for (int i=1; i<=ST.Len; i++)		//Êı×é´ÓÏÂ±ê1¿ªÊ¼´æ		
+	for (int i=1; i<=ST.Len; i++)		//æ•°ç»„ä»ä¸‹æ ‡1å¼€å§‹å­˜		
 	 	fscanf(fp,"%d",&ST.elem[i]);
 }	
