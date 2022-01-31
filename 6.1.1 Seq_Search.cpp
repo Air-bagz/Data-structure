@@ -4,10 +4,10 @@
 #define InitSize 20
 typedef int ElemType;
 
-typedef struct			//²éÕÒ±íµÄÊı¾İ½á¹¹(Ë³Ğò±í) 
+typedef struct			//æŸ¥æ‰¾è¡¨çš„æ•°æ®ç»“æ„(é¡ºåºè¡¨) 
 {
-	ElemType *elem;		//¶¯Ì¬Êı×é»ùÖ· 
-	int Len;			//±íµÄ³¤¶È 
+	ElemType *elem;		//åŠ¨æ€æ•°ç»„åŸºå€ 
+	int Len;			//è¡¨çš„é•¿åº¦ 
 }SeqTable;
 
 int Seq_Search(SeqTable ST,ElemType key);
@@ -17,18 +17,18 @@ int main()
 {
 	SeqTable ST;
 	InitTable(ST);
-	printf("66ÔªËØµÄÏÂ±êÎª:%d\n",Seq_Search(ST,66));
-	printf("41ÔªËØµÄÏÂ±êÎª:%d\n",Seq_Search(ST,41));
+	printf("66å…ƒç´ çš„ä¸‹æ ‡ä¸º:%d\n",Seq_Search(ST,66));
+	printf("41å…ƒç´ çš„ä¸‹æ ‡ä¸º:%d\n",Seq_Search(ST,41));
 	return 0;
 }
 
-//Ë³Ğò²éÕÒ
+//é¡ºåºæŸ¥æ‰¾
 int Seq_Search(SeqTable ST,ElemType key)
 {
 	int i=0;
 	while (i<ST.Len && ST.elem[i]!=key)
 		i++;
-	//²éÕÒ³É¹¦£¬Ôò·µ»ØÔªËØÏÂ±ê£»²éÕÒÊ§°Ü£¬Ôò·µ»Ø-1
+	//æŸ¥æ‰¾æˆåŠŸï¼Œåˆ™è¿”å›å…ƒç´ ä¸‹æ ‡ï¼›æŸ¥æ‰¾å¤±è´¥ï¼Œåˆ™è¿”å›-1
 	return i==ST.Len? -1 : i; 
  } 
  
