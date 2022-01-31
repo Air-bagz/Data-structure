@@ -1,7 +1,7 @@
-//ÕÛ°ë²éÕÒ£º
-//1.ÔªËØÉıĞòÅÅÁĞ
-//2.Êı×éÏÂ±ê´Ó0¿ªÊ¼´æ´¢
-//3.mid=(low+high)/2  ÊÇÏòÏÂÈ¡Õû    
+//æŠ˜åŠæŸ¥æ‰¾ï¼š
+//1.å…ƒç´ å‡åºæ’åˆ—
+//2.æ•°ç»„ä¸‹æ ‡ä»0å¼€å§‹å­˜å‚¨
+//3.mid=(low+high)/2  æ˜¯å‘ä¸‹å–æ•´    
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -9,10 +9,10 @@
 #define InitSize 20
 typedef int ElemType;
 
-typedef struct			//²éÕÒ±íµÄÊı¾İ½á¹¹(Ë³Ğò±í) 
+typedef struct			//æŸ¥æ‰¾è¡¨çš„æ•°æ®ç»“æ„(é¡ºåºè¡¨) 
 {
-	ElemType *elem;		//¶¯Ì¬Êı×é»ùÖ· 
-	int Len;			//±íµÄ³¤¶È 
+	ElemType *elem;		//åŠ¨æ€æ•°ç»„åŸºå€ 
+	int Len;			//è¡¨çš„é•¿åº¦ 
 }SeqTable;
 
 int Binary_Search(SeqTable L,ElemType key);
@@ -22,26 +22,26 @@ int main()
 {
 	SeqTable L;
 	InitTable(L);
-	printf("12ÔªËØµÄÏÂ±êÎª:%d\n",Binary_Search(L,12));
-	printf("33ÔªËØµÄÏÂ±êÎª:%d\n",Binary_Search(L,33));
+	printf("12å…ƒç´ çš„ä¸‹æ ‡ä¸º:%d\n",Binary_Search(L,12));
+	printf("33å…ƒç´ çš„ä¸‹æ ‡ä¸º:%d\n",Binary_Search(L,33));
 	return 0;
 }
 
-//ÕÛ°ë²éÕÒ
+//æŠ˜åŠæŸ¥æ‰¾
 int Binary_Search(SeqTable L,ElemType key)
 {
 	int low=0,high=L.Len-1,mid;
 	while (low<=high)
 	{
-		mid=(low+high)/2;			//È¡ÖĞ¼äÎ»ÖÃ 
+		mid=(low+high)/2;			//å–ä¸­é—´ä½ç½® 
 		if (L.elem[mid]==key)		
-			return	mid;			//²éÕÒ³É¹¦Ôò·µ»ØÔªËØÏÂ±ê 
+			return	mid;			//æŸ¥æ‰¾æˆåŠŸåˆ™è¿”å›å…ƒç´ ä¸‹æ ‡ 
 		else if (L.elem[mid]>key)
-			high=mid-1;				//´ÓÇ°°ë²¿·Ö¼ÌĞø²éÕÒ 
+			high=mid-1;				//ä»å‰åŠéƒ¨åˆ†ç»§ç»­æŸ¥æ‰¾ 
 		else 
-			low=mid+1;				//´Óºó°ë²¿·Ö¼ÌĞø²éÕÒ 
+			low=mid+1;				//ä»ååŠéƒ¨åˆ†ç»§ç»­æŸ¥æ‰¾ 
 	}
-	return -1;				//²éÕÒÊ§°Ü£¬·µ»Ø-1 
+	return -1;				//æŸ¥æ‰¾å¤±è´¥ï¼Œè¿”å›-1 
 }
 
 void InitTable(SeqTable &L)
