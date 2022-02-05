@@ -5,7 +5,7 @@ void Print(int A[],int n);
 
 int main()
 {
-	int a[]={49,38,65,97,76,13,27,49};//´Ó[0]¿ªÊ¼´æ´¢ 
+	int a[]={49,38,65,97,76,13,27,49};//ä»Ž[0]å¼€å§‹å­˜å‚¨ 
 	InsertSort(a,8);
 	Print(a,8);
 	//printf("%d",a[-2]);
@@ -17,9 +17,9 @@ void InsertSort(int A[],int n)
 	for (i=1; i<n; i++)
 	{
 		j=i-1;		temp=A[i];
-		while (temp<A[j] && j>=0)	//j>=0±ØÒª£¬²»È»A[-1]Î´Öª 
+		while (temp<A[j] && j>=0)	//j>=0å¿…è¦ï¼Œä¸ç„¶A[-1]æœªçŸ¥ 
 		{
-			A[j+1]=A[j];	//´óµÄºóÒÆ(ÑÏ¸ñ>) 
+			A[j+1]=A[j];	//å¤§çš„åŽç§»(ä¸¥æ ¼>) 
 			j--;
 		}
 		A[j+1]=temp;
