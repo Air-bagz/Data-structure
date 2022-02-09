@@ -1,3 +1,6 @@
+//填坑法1:基准取第一个	A[low]	 
+//[0]---[n-1] ([1]---[n]一样)
+//两个while不可交换 
 #include<stdio.h> 
 
 void QuickSort(int A[],int low,int high);
