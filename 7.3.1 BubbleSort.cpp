@@ -1,4 +1,4 @@
-//´ÓºóÍùÇ°	[0]--[n-1]´æ´¢ 
+//ä»åå¾€å‰	[0]--[n-1]å­˜å‚¨ 
 #include<stdio.h>
 
 void BubbleSort(int A[],int n);
@@ -12,24 +12,24 @@ int main()
 	Print(a,8);
 }
 
-//Ã°ÅİÅÅĞò
+//å†’æ³¡æ’åº
 void BubbleSort(int A[],int n)
 {
 	for (int i=0; i<n-1; i++)
 	{
-		bool flag=false;		//±íÊ¾±¾ÌËÃ°ÅİÊÇ·ñ·¢Éú½»»»µÄ±êÖ¾ 
-		for (int j=n-1; j>i; j--)	//Ò»ÌËÃ°Åİ¹ı³Ì 
-			if (A[j-1]>A[j])	//ÈôÎªÄæĞò 
+		bool flag=false;		//è¡¨ç¤ºæœ¬è¶Ÿå†’æ³¡æ˜¯å¦å‘ç”Ÿäº¤æ¢çš„æ ‡å¿— 
+		for (int j=n-1; j>i; j--)	//ä¸€è¶Ÿå†’æ³¡è¿‡ç¨‹ 
+			if (A[j-1]>A[j])	//è‹¥ä¸ºé€†åº 
 			{	
-				swap(A[j-1],A[j]);	//½»»» 
+				swap(A[j-1],A[j]);	//äº¤æ¢ 
 				flag=true;
 			}
 		if (flag==false)
-			return;		//±¾ÌË±éÀúºóÃ»ÓĞ·¢Éú½»»»£¬ËµÃ÷±íÒÑ¾­ÓĞĞò 
+			return;		//æœ¬è¶Ÿéå†åæ²¡æœ‰å‘ç”Ÿäº¤æ¢ï¼Œè¯´æ˜è¡¨å·²ç»æœ‰åº 
 	}
  } 
  
-//½»»»
+//äº¤æ¢
 void swap(int &a,int &b)
 {
 	int temp=a;
